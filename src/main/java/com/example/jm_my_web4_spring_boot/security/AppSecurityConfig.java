@@ -19,13 +19,8 @@ import com.example.jm_my_web4_spring_boot.service.UserService;
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
     @Override
@@ -39,7 +34,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+//        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(userService);
         userService.addUser(new User("default user", "default user", "user", "user", 99L, new Role("user")));
         userService.addUser(new User("default admin", "default admin", "admin", "admin", 99L, new Role("admin")));
     }

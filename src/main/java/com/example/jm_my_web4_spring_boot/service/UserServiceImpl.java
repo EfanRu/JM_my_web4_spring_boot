@@ -17,8 +17,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserServiceImpl() {}
 
@@ -40,7 +40,8 @@ public class UserServiceImpl implements UserService {
     public boolean addUser(User user) {
         User userFromDB = userDao.getUserByLogin(user.getLogin());
         if (userFromDB == null) {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setPassword(user.getPassword());
             userDao.addUser(user);
             return true;
         }
@@ -60,7 +61,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
         if (password != null && !password.equals("")) {
-            password = bCryptPasswordEncoder.encode(password);
+//            password = bCryptPasswordEncoder.encode(password);
+            password = (password);
             return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
         }
         return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login);
@@ -71,7 +73,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return false;
         }
-        return bCryptPasswordEncoder.matches(password, user.getPassword());
+//        return bCryptPasswordEncoder.matches(password, user.getPassword());
+        return (password.equals(user.getPassword()) );
     }
 
     @Override
