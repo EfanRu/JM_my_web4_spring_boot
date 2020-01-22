@@ -1,0 +1,175 @@
+Task # 1:
+    + 1) Написать CRUD приложение. Использовать Tomcat, Maven, JSP, сервлеты, JDBC.
+	+ 2) Должен быть класс User  с произвольными полями (id, name и т.п.)
+	+ 3) В приложении должна быть страница на которую выводятся все юзеры с возможностью добавлять, удалять и изменять юзера.
+	+ 4) Конфигурация сервлетов через аннотации.
+Task # 3:
+    + 1) Прочитать про паттерн Фабрика.
+	+ 2) В ресурсах создать файл .property, который содержит ключ “тип дао” и значение, соответствующее одному из DAO.
+	+ 3) UserDaoFactory - фабрика которая возвращает реализацию DAO на основе файла .property.
+	+ 4) DBHelper - синглтон, у него есть два метода getConnection и getConfiguration, которые отдают Connection для jdbc dao и Configuration для hibernate dao соответственно.
+	+ 5) Сервис - синглтон.
+Task # 4
+    + 1) Добавить классу User поле role типа String, которое будет принимать значения user или admin.
+    + 2) На индексной странице сделать форму логина, в которую будет вводиться логин и пароль юзера.
+    + 3) Добавить сервлет фильтр,  который после логина будет пропускать пользователей с ролью user на страницу /user , а пользователей с ролью admin на страницу /admin , на которой будет таблица всех юзеров с возможностью их изменения (она уже сделана).
+	+ 4) Сделать так чтобы user не мог заходить на все страницы, которые начинаются на /admin (т.e. не мог видеть таблицу пользователей или производить с ней какие-либо действия).
+	+ 5) Admin может заходить на /user
+	+ 6) Все запросы админа должны начинаться с /admin/
+Task # 5
+    + 1) Написать CRUD-приложение для класса User.
+    + 2) Использовать Spring MVC + Hibernate.
+    + 3) Должен быть класс User с произвольными полями (id, name и т.п.).
+    + 4) В приложении должна быть страница, на которую выводятся все юзеры с возможностью добавлять, удалять и изменять юзера.
+    + 6) Конфигурация Spring через JavaConfig и аннотации. Без Spring Boot.
+Task # 6
+    1) Добавить Spring Security.
+    ?? 2) Создать класс Role.
+    3) Имплементировать классы спринга GrantedAuthority и UserDetails.
+    4) Создать страницу для юзера, таблицу пользователей добавить на страницу админа.
+    5) Настроить секьюрность.
+Task # 7
+    1) Перенести приложение на Spring Boot, вместо JSP-страниц HTML + Thymeleaf.
+Task # 8
+    1) изменить страницы приложения в соответствии со скриншотами, используя Bootstrap.
+
+
+Links:
+	JSP: http://java-course.ru/student/book1/jsp/
+	JDBC: https://habr.com/ru/post/101342/
+    Spring MVC Security: https://habr.com/ru/post/226791/
+    Spring MVC example 1: https://memorynotfound.com/spring-mvc-java-configuration-example/
+    Spring MVC example 2: https://www.codejava.net/frameworks/spring/spring-mvc-spring-data-jpa-hibernate-crud-example
+    Spring MVC full java conf. : https://www.dev2qa.com/spring-mvc-full-java-based-configuration-example/
+    Spring MVC MySQL: https://www.javaguides.net/2018/11/spring-mvc-5-hibernate-5-jsp-mysql-crud-tutorial.html
+    Spring MVC JPA MySQL EntityManager: https://www.javaguides.net/2018/11/spring-mvc-5-spring-data-jpa-hibernate-jsp-mysql-tutorial.html
+    Presentation of Sprting MVC: https://people.ric-ul.ru/QA/Files/common/Contest/93_5453748daea69dda43459f003e971f6f1cf1.pdf
+
+    Spring security: https://habr.com/ru/post/482552/
+    SuccessHandler: https://www.baeldung.com/spring_redirect_after_login
+
+    Spring boot:
+    https://habr.com/ru/post/435144/
+    https://o7planning.org/ru/11267/spring-boot-tutorial-for-beginners
+
+Questions:
+
+Reworking list 1:https://www.javatpoint.com/spring-mvc-tutorial
+    + 1)Убрать из гитхаба ненужные папки такие например как idea, которых не должно быть
+    + 2)Удалить Main
+    + 3)resp.getWriter().println("User add successful"); вот это вот все убрать и что-то похожее
+    + 4)В моделях сейчас не должно быть никаких аннотаций ты работаешь c JDBC (edited)
+    + 5)Работаем полностью без xml т.е. его надо удалить
+    + 6)Тоже самое с метаинф и xml там
+    + 7)Внутри jsp не должно быть никакого кода, кроме кода html и jstl тегов, но никакого java кода
+    + 8)У тебя всего должно быть 2 jsp файла , один для всех людей которых ты выводишь на экран + добавление внизу таблицы, второй для обновления юзера
+    + 9)Все конекшен через JDBC
+Reworking list 2:
+    + 1)Reworking list 1-7
+    + 2)именование пакетов с маленькой буквы
+    + 3)В сервисе не должно быть подключения к базе, подключение вынести в отдельный пакет и класс
+    + 4)Интерфейсы для дао и сервиса
+    + 5)Убрать все комментарии из кода
+    + 6)В сервлетах не дублировать код
+    + 7)Убрать конфигурацию с Hibernate
+Reworking list 3:
+    + 1)Переменная не может называться просто "c" - UserDaoimpl;
+    + (можно и короче) 2)Во всех методах должны быть транзакции. Транзакции должны работать в случае возникновения ошибок и откатывать изменения, внесённые в базу;
+    + 3)Вот таких строчек быть не должно. UserDao должен быть полем в сервисе, и ни в коем случае он не должен создаваться всякий раз, когда сервис принимает запрос
+      src/main/java/service/UserServiceImpl.java (Line 13);
+    + 4)Не должно быть пробелов в названии параметров
+      src/main/java/servlet/AddUserServlet.java (Lines 17-19);
+    + 5)То же самое: сервис должен быть полем севрелета, а не создаваться новый на каждый запрос. подумай, сколько этих сервисов будет создано, если мы добавим 10к пользователей
+      src/main/java/servlet/AddUserServlet.java (Line 21);
+    + 6)То же самое. для всех сервлетов
+      src/main/java/servlet/AllUsersServlet.java (Line 18);
+    + 7)Нельзя отдавать страницу после отправки post запроса. страницу может отдавать только get запрос. после post запроса надо делать редирект get
+      src/main/java/servlet/AddUserServlet.java (Line 26);
+    + 8)То же самое - тут нужен редирект
+      src/main/java/servlet/DeleteUserServlet.java (Line 23)
+      src/main/java/servlet/EditUserServlet.java (Line 32);
+    + 9)Тут вообще жестко захардкожено всё. у тебя вообще не правильная структура проекта. посмотри, как должна выглядеть структура maven проекта. нет папки resources нет папки webapp. это надо исправить
+      далее: в папке resouces у тебя должен быть файл .property, в котором ты как раз и опишешь все что нужно для подключения к базе данных. пароль, порт и т.д.
+      из этого файла надо будет посто читать нужные параметры. создай класс PropertyReader, с единственным статическим методом getProperty, который будет принимать строку с названием проперти и возвращать её значение
+      src/main/java/util/DBHelper.java (Lines 16-32);
+    + 10)Используй в запросах capslock
+       src/main/java/dao/UserDaoImpl.java (Line 35);
+Reworking list 4:
+    + 1) Коннекшн в дао JDBC;
+    + 2) В дао передавать фабрику сессий хиб;
+    + 3) Ловить эксепшн при закрытии сессии;
+    + 4) Реализовать паттерн шаблонный метод - фабричный метод;
+    + 5) Реализовать свойства через Property class;
+    + 6) DBHelper исправить;
+    + 7) JSP с маленькой буквы;
+    + 8) Название папки в ед. экз;
+    + 9)"http://localhost:8080/all" - зачем полный путь?
+    + 10) Селать 1 проперти;
+    + 11) Сделать Connection на каждый капрос в DAO JDBC.
+Reworking list 5:
+    + 1) В таблице 2 кнопки удалить и редактировать;
+    + 2) Логаут везде;
+    + 3) Залогиниться можно только разлогинившись;
+    + 4) Редирект с .jsp на начанулью страницу.
+    + 5) Проверка на нулл в сесс хиберна
+    + 6) убрать избыточную логику
+    + 7) index rename
+    + 8) Статический блок в проперти stat block
+    + 9) знать как все работает
+    + 10) Вынести поля класса Даофактори в методы;
+    + 11) Вывести имя пользователя на Юзера.
+Reworking list 6:
+    + 1) Что бы не писать кучу повторяющегося кода - вынеси транзакцию как локальную переменную метода;
+    + 2) Но вот такие вещи либо в файл проперти выносятся, либо в бд;
+    + 3) формат называенися properties;
+    + 4) Взде вынести дао/сервисы в поле того класса, котрые их используют, и создавать единожды;
+    + 5) Тут у тебя явно лишняя работа делается. Не стоит создавать сразу два дао, если вернуть нужно только один;
+Reworking list 7:
+    + 1) Сделать нормальное удаление
+    + 2) Показ значений
+    + 3) добавить поддержку рус
+    + 4) очертание
+    + 5) отдельную папку
+    + 6) @EnableJpaRepositories(basePackages = "repository") как обойтись без этой аннотации
+    + 7) /user
+    + 8) ModelAttribute
+    + 9) Роль класс
+    + 10) EntityManager -> Rep
+    + 11) Sokr - norm
+    12) Отказ в доступе редиректить на страницу с ошибкой
+    + 13) Сделать дефолтную учетную запись
+    14) Почистить код от хлама
+Reworking list 8:
+    + 1) Сделать чек бокс для роли
+    + 2) http://localhost:8080/user исправить ошибку
+    + 3) Зависимость через GrantedAuthority
+    + 4) вернуть DAO и Service
+    + 5) Добавить UserDetails и contextHandler, encoder
+    + 6) В чем отличие hasRole and access and hasAccess(mb other name)
+    + 7) Добавить шифрование паролей
+Reworking list 9:
+    + 1) Redirect admin on admin page and user on user page. Use SuccesHandler;
+    + 2) Block login for authenticated users;
+    + 3) Repair deleting first row in table;
+    + 4) Repair double password encrypt in edit page;
+    + 5) Change Role. Create new constructor, del parse method;
+    + 6) NamedQueries in User must be delete;
+    + 7) Add default user and admin in @Bean class.
+
+Save code:
+    insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
+
+    insert into user (id, first_name, last_name, phone_number, role_id, login, password) VALUES(null, 'admin', 'admin', 999, 1, 'admin', 'admin');
+    insert into user (id, first_name, last_name, phone_number, role_id, login, password) VALUES(null, 'admin', 'admin', 999, 1, 'admin', '$2a$10$EeevpoM0kg9lFt3/7.dHnuvT/.CwHE6Z3mf/nQQXchNTpgkn8o6Hq');
+    insert into role (id, name) values(1, 'admin');
+
+Pre-project education structure:
+    + ТЕМА №1 Разработка web-сервиса с использованием технологий Tomcat, Servlet, JSP, Maven , JDBC + паттерн проектирования Executor.
+    + ТЕМА №2 Добавление в проект JPA, Hibernate. Применение паттернов Factory, Singletone.
+    + ТЕМА №3 Добавление RBAC (Role Based Access Control), разделение по ролям, контроль доступности ресурсов для администратора и пользователя. Использование технологии Servlet Filters.
+    + ТЕМА №4 Знакомство с Spring Core, перевод проекта с Servlet на Spring MVC. Конфигурирование Spring для работы с ORM (Hibernate).
+    + ТЕМА №5 Подключение Spring Security вместо Servlet Filters. Настройка конфигурации безопасности web-приложения.
+    ТЕМА №6 Подключение фреймворка Bootstrap для создания адаптивных web страниц.
+    ТЕМА №7 Перевод проекта на Spring Boot с использованием шаблонизатора Thymeleaf.
+    ТЕМА №8 Создание RESTful сервиса с использованием технологий Spring REST. Построение грамотной REST архитектуры.
+    ТЕМА №9 Разработка клиента (пользователя) рестфул сервиса с использованием технологий Spring REST Template.
