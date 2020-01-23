@@ -23,11 +23,11 @@ Task # 5
     + 4) В приложении должна быть страница, на которую выводятся все юзеры с возможностью добавлять, удалять и изменять юзера.
     + 6) Конфигурация Spring через JavaConfig и аннотации. Без Spring Boot.
 Task # 6
-    + 1) Добавить Spring Security.
-    + 2) Создать класс Role.
-    + 3) Имплементировать классы спринга GrantedAuthority и UserDetails.
-    + 4) Создать страницу для юзера, таблицу пользователей добавить на страницу админа.
-    + 5) Настроить секьюрность.
+    1) Добавить Spring Security.
+    ?? 2) Создать класс Role.
+    3) Имплементировать классы спринга GrantedAuthority и UserDetails.
+    4) Создать страницу для юзера, таблицу пользователей добавить на страницу админа.
+    5) Настроить секьюрность.
 Task # 7
     1) Перенести приложение на Spring Boot, вместо JSP-страниц HTML + Thymeleaf.
 Task # 8
@@ -148,13 +148,16 @@ Reworking list 8:
     + 6) В чем отличие hasRole and access and hasAccess(mb other name)
     + 7) Добавить шифрование паролей
 Reworking list 9:
-    + 1) Redirect admin on admin page and user on user page. Use SuccesHandler;
+    + 1) Redirect admin on admin page and user on user page. Use SuccessHandler;
     + 2) Block login for authenticated users;
     + 3) Repair deleting first row in table;
     + 4) Repair double password encrypt in edit page;
     + 5) Change Role. Create new constructor, del parse method;
     + 6) NamedQueries in User must be delete;
     + 7) Add default user and admin in @Bean class.
+Reworking list 10:
+    + 1) Шлефануть аксесс хэндлер;
+    + 2) Сделать дефолтный Bean c пользователем.
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
