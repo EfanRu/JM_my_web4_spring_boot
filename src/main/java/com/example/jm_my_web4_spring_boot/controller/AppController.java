@@ -65,19 +65,18 @@ public class AppController {
     public String allUser(ModelMap model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("listUser", users);
-//        return "allUsers";
         return "adminAll";
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
-    public String editUserPage(@ModelAttribute("id") String id, ModelMap model) {
+    public String editUserPage(@ModelAttribute("user.id") String id, ModelMap model) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "editUsers";
     }
 
-    @RequestMapping(value = "/admin/edit/{user}", method = RequestMethod.POST)
-    public String editUser(@PathVariable("user") User user, HttpServletRequest req) {
+    @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
+    public String editUser(@ModelAttribute("user") User user, HttpServletRequest req) {
         userService.updateUser(user);
 //        userService.updateUser(
 //                req.getParameter("id"),
@@ -91,7 +90,7 @@ public class AppController {
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
-    public String delUser(@Valid String id) {
+    public String delUser(@ModelAttribute("id") String id) {
         userService.deleteUser(id);
         return "redirect:/admin/all";
     }

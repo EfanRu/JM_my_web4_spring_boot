@@ -34,18 +34,18 @@ All users in database:
 
                 <td>
 
-                    <form th:action="@{/admin/delete}" method="get">
+                    <form action="/admin/delete" method="get">
                         <button hidden></button>
                     </form>
 
-                    <form action="/admin/delete" th:action="@{/admin/delete}" th:object="${user.id}" method="get">
-                        <button type="submit">del</button>
+                    <form action="/admin/delete" method="get">
+                        <button type="submit" name="id" th:value="${user.id}">del</button>
                     </form>
                 </td>
 
                 <td valign="middle">
-                    <form th:action="@{/admin/edit/${user}}" method="get">
-                        <button type="submit">edit</button>
+                    <form action="/admin/edit" method="get">
+                        <button type="submit" name="user" th:value="${user}">edit</button>
                     </form>
                 </td>
 

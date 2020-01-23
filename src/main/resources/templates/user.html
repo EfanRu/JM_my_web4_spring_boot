@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User's page</title>
+</head>
+<body>
+
+<h3>Welcome to user page, piece of meat!</h3>
+Bla-bla-bla...
+<form action="/user" method="get">
+    <table border = "1">
+        <tr>
+            <td>id</td>
+            <td>First name</td>
+            <td>Second name</td>
+            <td>Login</td>
+            <td>Password</td>
+            <td>Phone number</td>
+            <td>Role</td>
+        </tr>
+        <tr>
+            <td th:text="${user.id}">id</td>
+            <td th:text="${user.firstName}">first name</td>
+            <td th:text="${user.lastName}">last name</td>
+            <td th:text="${user.login}">login</td>
+            <td th:text="${user.password}">password</td>
+            <td th:text="${user.phoneNumber}">phone number</td>
+            <td th:text="${user.role.name}">role</td>
+        </tr>
+    </table>
+</form>
+
+<form action="/logout" method="get">
+    <input type="submit" value="Log out">
+</form>
+
+
+</body>
+</html>
