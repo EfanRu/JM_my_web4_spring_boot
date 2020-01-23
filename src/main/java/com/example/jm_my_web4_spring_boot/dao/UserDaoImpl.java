@@ -76,6 +76,19 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+
+    @Transactional
+    @Override
+    public boolean updateUser(User user) {
+        try {
+            entityManager.merge(user);
+            return true;
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     @Override
     public boolean checkAuth(String login, String password) {
         try {

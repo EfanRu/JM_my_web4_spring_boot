@@ -75,6 +75,18 @@ public class UserServiceImpl implements UserService {
         return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login);
     }
 
+    @Override
+    public boolean updateUser(User user) {
+        String password = user.getPassword();
+        if (password != null && !password.equals("")) {
+            password = md4PasswordEncoder.encode(password);
+//            password = (password);
+            user.setPassword(password);
+            return userDao.updateUser(user);
+        }
+        return userDao.updateUser(user.getId().toString(), user.getFirstName(), user.getLastName(), user.getPhoneNumber().toString(), user.getRole().getName(), user.getLogin());
+    }
+
     public boolean checkAuth(String login, String password) {
         User user = userDao.getUserByLogin(login);
         if (user == null) {

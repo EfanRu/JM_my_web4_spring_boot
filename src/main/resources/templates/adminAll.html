@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Welcome Admin</title>
+</head>
+
+<body>
+
+All users in database:
+
+<form action="/admin/all" method="get">
+    <table border="1">
+        <tr>
+            <td>id</td>
+            <td>First name</td>
+            <td>Second name</td>
+            <td>Login</td>
+            <td>Password</td>
+            <td>Phone number</td>
+            <td>Role</td>
+            <td>Edit</td>
+            <td>Remove</td>
+        </tr>
+        <th:block th:each="user:${listUser}">
+            <tr>
+                <td th:utext="${user.id}">id</td>
+                <td th:utext="${user.firstName}">first name</td>
+                <td th:utext="${user.lastName}">last name</td>
+                <td th:utext="${user.login}">login</td>
+                <td th:utext="${user.password}">password</td>
+                <td th:utext="${user.phoneNumber}">phone number</td>
+                <td th:utext="${user.role.name}">role</td>
+
+                <td>
+
+                    <form th:action="@{/admin/delete}" method="get">
+                        <button hidden></button>
+                    </form>
+
+                    <form action="/admin/delete" th:action="@{/admin/delete}" th:object="${user.id}" method="get">
+                        <button type="submit">del</button>
+                    </form>
+                </td>
+
+                <td valign="middle">
+                    <form th:action="@{/admin/edit/${user}}" method="get">
+                        <button type="submit">edit</button>
+                    </form>
+                </td>
+
+            </tr>
+        </th:block>
+    </table>
+</form>
+
+Add user:
+<form action="/admin/add" method="post">
+    First name:
+    <input type="text" name="firstName">
+    Last name:
+    <input type="text" name="lastName">
+    Phone number
+    <input type="text" name="phoneNumber">
+    Role
+    <select name="role">
+        <option value="admin">admin</option>>
+        <option value="user">user</option>>
+    </select>
+    Login
+    <input type="text" name="login">
+    Password
+    <input type="password" name="password">
+    <input type="submit" value="Submit">
+</form>
+
+<form action="/logout" method="get">
+    <input type="submit" value="Log out">
+</form>
+
+</body>
+</html>

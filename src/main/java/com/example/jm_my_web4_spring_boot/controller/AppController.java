@@ -11,10 +11,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -74,21 +76,22 @@ public class AppController {
         return "editUsers";
     }
 
-    @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
-    public String editUser(HttpServletRequest req) {
-        userService.updateUser(
-                req.getParameter("id"),
-                req.getParameter("firstName"),
-                req.getParameter("lastName"),
-                req.getParameter("phoneNumber"),
-                req.getParameter("role"),
-                req.getParameter("login"),
-                req.getParameter("password"));
+    @RequestMapping(value = "/admin/edit/{user}", method = RequestMethod.POST)
+    public String editUser(@PathVariable("user") User user, HttpServletRequest req) {
+        userService.updateUser(user);
+//        userService.updateUser(
+//                req.getParameter("id"),
+//                req.getParameter("firstName"),
+//                req.getParameter("lastName"),
+//                req.getParameter("phoneNumber"),
+//                req.getParameter("role"),
+//                req.getParameter("login"),
+//                req.getParameter("password"));
         return "redirect:/admin/all";
     }
 
     @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
-    public String delUser(@ModelAttribute("delId") String id) {
+    public String delUser(@Valid String id) {
         userService.deleteUser(id);
         return "redirect:/admin/all";
     }
