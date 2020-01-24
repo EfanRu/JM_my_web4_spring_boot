@@ -22,12 +22,18 @@ public class DefaultUserAndAdmin {
     @Bean
     public void DefaultUserAndAdmin() {
         User user = new User();
+        user.setFirstName("Default user");
+        user.setLastName("Default user");
+        user.setPhoneNumber(99L);
         user.setLogin(env.getProperty("db.default.user.login"));
         user.setPassword(env.getProperty("db.default.user.password"));
         user.setRole(new Role("user"));
         userService.addUser(user);
 
         User admin = new User();
+        admin.setFirstName("Default admin");
+        admin.setLastName("Default admin");
+        admin.setPhoneNumber(99L);
         admin.setLogin(env.getProperty("db.default.admin.login"));
         admin.setPassword(env.getProperty("db.default.admin.password"));
         admin.setRole(new Role("admin"));

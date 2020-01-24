@@ -11,12 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -29,13 +27,11 @@ public class AppController {
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
     public String login(Principal principal) {
-        LOG.info("Inside login or welcome page!");
         return principal == null ? "login" : "redirect:/user";
     }
 
     @RequestMapping(value = "/admin/add", method = RequestMethod.POST)
     public String add(HttpServletRequest req) {
-        LOG.info("Inside add!");
         userService.addUser(new User(
                 req.getParameter("firstName"),
                 req.getParameter("lastName"),
@@ -69,23 +65,22 @@ public class AppController {
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
-    public String editUserPage(@ModelAttribute("user.id") String id, ModelMap model) {
+    public String editUserPage(@ModelAttribute("id") String id, ModelMap model) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
         return "editUsers";
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.POST)
-    public String editUser(@ModelAttribute("user") User user, HttpServletRequest req) {
-        userService.updateUser(user);
-//        userService.updateUser(
-//                req.getParameter("id"),
-//                req.getParameter("firstName"),
-//                req.getParameter("lastName"),
-//                req.getParameter("phoneNumber"),
-//                req.getParameter("role"),
-//                req.getParameter("login"),
-//                req.getParameter("password"));
+    public String editUser(/*@ModelAttribute("user") User user,*/ HttpServletRequest req) {
+        userService.updateUser(
+                req.getParameter("id"),
+                req.getParameter("firstName"),
+                req.getParameter("lastName"),
+                req.getParameter("phoneNumber"),
+                req.getParameter("role"),
+                req.getParameter("login"),
+                req.getParameter("password"));
         return "redirect:/admin/all";
     }
 

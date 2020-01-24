@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService {
         User userFromDB = userDao.getUserByLogin(user.getLogin());
         if (userFromDB == null) {
             user.setPassword(md4PasswordEncoder.encode(user.getPassword()));
-//            user.setPassword(user.getPassword());
             userDao.addUser(user);
             return true;
         }
@@ -69,7 +68,6 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
         if (password != null && !password.equals("")) {
             password = md4PasswordEncoder.encode(password);
-//            password = (password);
             return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
         }
         return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login);
@@ -80,7 +78,6 @@ public class UserServiceImpl implements UserService {
         String password = user.getPassword();
         if (password != null && !password.equals("")) {
             password = md4PasswordEncoder.encode(password);
-//            password = (password);
             user.setPassword(password);
             return userDao.updateUser(user);
         }
@@ -93,7 +90,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         return md4PasswordEncoder.matches(password, user.getPassword());
-//        return (password.equals(user.getPassword()) );
     }
 
     @Override

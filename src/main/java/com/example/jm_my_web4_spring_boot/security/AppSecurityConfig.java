@@ -44,7 +44,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(md4PasswordEncoder);
-//        auth.userDetailsService(userService);
     }
 
     @Override
