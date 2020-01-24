@@ -33,7 +33,7 @@ All users in database:
                 <td th:utext="${user.role.name}">role</td>
 
                 <td>
-
+                    <!--Hidden button need for deleting 1 row in the table. First button don't working((-->
                     <form action="/admin/delete" method="get">
                         <button hidden></button>
                     </form>
@@ -43,7 +43,7 @@ All users in database:
                     </form>
                 </td>
 
-                <td valign="middle">
+                <td>
                     <form action="/admin/edit" method="get">
                         <button type="submit" name="id" th:value="${user.id}">edit</button>
                     </form>

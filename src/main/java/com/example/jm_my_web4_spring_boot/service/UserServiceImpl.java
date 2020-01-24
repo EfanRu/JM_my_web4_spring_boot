@@ -4,11 +4,9 @@ import com.sun.istack.Nullable;
 import com.example.jm_my_web4_spring_boot.dao.UserDao;
 import com.example.jm_my_web4_spring_boot.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +19,15 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    @Autowired
-    @Qualifier("md4PasswordEncoder")
-    @Lazy
-    private PasswordEncoder md4PasswordEncoder;
 
+//      Old working code!
+//    @Autowired
+//    @Qualifier("md4PasswordEncoder")
+//    @Lazy
+//    private PasswordEncoder md4PasswordEncoder;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserServiceImpl() {}
 
@@ -47,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public boolean addUser(User user) {
         User userFromDB = userDao.getUserByLogin(user.getLogin());
         if (userFromDB == null) {
-            user.setPassword(md4PasswordEncoder.encode(user.getPassword()));
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userDao.addUser(user);
             return true;
         }
@@ -67,7 +69,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(String id, String firstName, String lastName, String phoneNumber, String role, String login, String password) {
         if (password != null && !password.equals("")) {
-            password = md4PasswordEncoder.encode(password);
+            password = bCryptPasswordEncoder.encode(password);
             return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login, password);
         }
         return userDao.updateUser(id, firstName, lastName, phoneNumber, role, login);
@@ -77,7 +79,7 @@ public class UserServiceImpl implements UserService {
     public boolean updateUser(User user) {
         String password = user.getPassword();
         if (password != null && !password.equals("")) {
-            password = md4PasswordEncoder.encode(password);
+            password = bCryptPasswordEncoder.encode(password);
             user.setPassword(password);
             return userDao.updateUser(user);
         }
@@ -89,7 +91,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return false;
         }
-        return md4PasswordEncoder.matches(password, user.getPassword());
+        return bCryptPasswordEncoder.matches(password, user.getPassword());
     }
 
     @Override

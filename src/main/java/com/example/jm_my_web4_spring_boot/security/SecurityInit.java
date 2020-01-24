@@ -10,7 +10,8 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 
 @Order(2)
 public class SecurityInit extends AbstractSecurityWebApplicationInitializer {
-//    @Autowired
+//Old code for mentor
+    //    @Autowired
 //    PasswordEncoder passwordEncoder;
 
 //    @Autowired
@@ -21,5 +22,7 @@ public class SecurityInit extends AbstractSecurityWebApplicationInitializer {
 //    public BCryptPasswordEncoder md4PasswordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
+
+
 
 }
