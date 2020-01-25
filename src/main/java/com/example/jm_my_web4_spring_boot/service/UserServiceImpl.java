@@ -1,8 +1,8 @@
 package com.example.jm_my_web4_spring_boot.service;
 
-import com.sun.istack.Nullable;
 import com.example.jm_my_web4_spring_boot.dao.UserDao;
 import com.example.jm_my_web4_spring_boot.model.User;
+import com.sun.istack.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,14 +17,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-//      Old working code!
-//    @Autowired
-//    @Qualifier("md4PasswordEncoder")
-//    @Lazy
-//    private PasswordEncoder md4PasswordEncoder;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

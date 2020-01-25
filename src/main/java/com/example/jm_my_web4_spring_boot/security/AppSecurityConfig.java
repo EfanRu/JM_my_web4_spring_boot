@@ -1,5 +1,6 @@
 package com.example.jm_my_web4_spring_boot.security;
 
+import com.example.jm_my_web4_spring_boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import com.example.jm_my_web4_spring_boot.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -18,28 +18,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-//      Old working code!
-//    @Autowired
-//    @Qualifier("md4PasswordEncoder")
-//    private PasswordEncoder md4PasswordEncoder;
-
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    //    @Autowired
-//    ApplicationContext context;
-
-
-//    Working code!
-//    @Bean
-//    public BCryptPasswordEncoder md4PasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
-
 
     @Bean
     @Override
@@ -53,8 +35,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // Old working code!
-        //        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
 

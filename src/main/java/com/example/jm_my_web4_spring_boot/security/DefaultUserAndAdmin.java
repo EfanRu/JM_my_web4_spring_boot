@@ -2,13 +2,13 @@ package com.example.jm_my_web4_spring_boot.security;
 
 import com.example.jm_my_web4_spring_boot.model.Role;
 import com.example.jm_my_web4_spring_boot.model.User;
+import com.example.jm_my_web4_spring_boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import com.example.jm_my_web4_spring_boot.service.UserService;
 
 @Component
 @PropertySource("classpath:application.properties")
