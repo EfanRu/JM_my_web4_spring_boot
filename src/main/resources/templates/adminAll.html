@@ -3,56 +3,94 @@
 
 <head>
     <title>Welcome Admin</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <style type="text/css">
+
+        .form-table {
+            padding-left: 50px;
+            padding-right: 50px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin: auto;
+        }
+
+    </style>
 </head>
 
 <body>
 
-All users in database:
+        <div class="input-group" style="background: black">
+            <h3 style="color: darkgray">My project</h3>
+            <span class="input-group-btn">
+                <form action="/logout" method="get" >
+                    <button class="btn" style="background: black; color: darkgray">Log out</button>
+                </form>
+            </span>
+        </div>
 
-<form action="/admin/all" method="get">
-    <table border="1">
-        <tr>
-            <td>id</td>
-            <td>First name</td>
-            <td>Second name</td>
-            <td>Login</td>
-            <td>Password</td>
-            <td>Phone number</td>
-            <td>Role</td>
-            <td>Edit</td>
-            <td>Remove</td>
-        </tr>
-        <th:block th:each="user:${listUser}">
-            <tr>
-                <td th:utext="${user.id}">id</td>
-                <td th:utext="${user.firstName}">first name</td>
-                <td th:utext="${user.lastName}">last name</td>
-                <td th:utext="${user.login}">login</td>
-                <td th:utext="${user.password}">password</td>
-                <td th:utext="${user.phoneNumber}">phone number</td>
-                <td th:utext="${user.role.name}">role</td>
+        <h2>Admin panel</h2>
 
-                <td>
-                    <!--Hidden button need for deleting 1 row in the table. First button don't working((-->
-                    <form action="/admin/delete" method="get">
-                        <button hidden></button>
-                    </form>
+    <form class="form-table" action="/admin/all" method="get">
+        <h3>All users in database:</h3>
 
-                    <form action="/admin/delete" method="get">
-                        <button type="submit" name="id" th:value="${user.id}">del</button>
-                    </form>
-                </td>
+        <table class="table table-striped">
+            <thread>
+                <tr>
+                    <th>Id</th>
+                    <th>First name</th>
+                    <th>Second name</th>
+                    <th>Login</th>
+                    <th>Password</th>
+                    <th>Phone number</th>
+                    <th>Role</th>
+                    <th>Remove</th>
+                    <th>Edit</th>
+                </tr>
+            </thread>
+            <tbody>
+                <th:block th:each="user:${listUser}">
+                    <tr>
+                        <th th:utext="${user.id}">id</th>
+                        <th th:utext="${user.firstName}">first name</th>
+                        <th th:utext="${user.lastName}">last name</th>
+                        <th th:utext="${user.login}">login</th>
+                        <th th:utext="${user.password}">password</th>
+                        <th th:utext="${user.phoneNumber}">phone number</th>
+                        <th th:utext="${user.role.name}">role</th>
 
-                <td>
-                    <form action="/admin/edit" method="get">
-                        <button type="submit" name="id" th:value="${user.id}">edit</button>
-                    </form>
-                </td>
+                        <th>
+                            <!--Hidden button need for deleting 1 row in the table. First button don't working((-->
+                            <form action="/admin/delete" method="get">
+                                <button hidden></button>
+                            </form>
 
-            </tr>
-        </th:block>
-    </table>
-</form>
+                            <form action="/admin/delete" method="get">
+                                <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}">del</button>
+                            </form>
+                        </th>
+
+                        <th>
+                            <form action="/admin/edit" method="get">
+                                <button class="btn btn-primary btn-xs" type="submit" name="id" th:value="${user.id}">edit</button>
+                            </form>
+                        </th>
+
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+    </form>
 
 Add user:
 <form action="/admin/add" method="post">
@@ -72,10 +110,6 @@ Add user:
     Password
     <input type="password" name="password">
     <input type="submit" value="Submit">
-</form>
-
-<form action="/logout" method="get">
-    <input type="submit" value="Log out">
 </form>
 
 </body>
