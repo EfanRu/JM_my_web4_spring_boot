@@ -25,6 +25,12 @@
             margin: auto;
         }
 
+        .container-fluid {
+            padding-right: 0px;
+            padding-left: 0px;
+            margin-right: auto;
+            margin-left: auto;
+        }
 
     </style>
 </head>
@@ -41,13 +47,14 @@
 
     <div class="container-fluid" >
         <div class="row-fluid flex">
-            <div class="col-sm-3 col-md-2 sidebar">
+            <div class="col-sm-2 col-md-2 sidebar">
                 <ul class="nav nav-siderbar">
-                    <a href="/admin/all">admin</a>
+                    <br>
+                    <a href="/admin/all">admin</a><br>
                     <a href="/admin/all">user</a>
                 </ul>
             </div>
-            <div class="col-sm-9 col-md-10 main" style="background: rgba(187,186,195,0.47)">
+            <div class="col-sm-10 col-md-10 main" style="background: rgba(187,186,195,0.47); min-height: 700px">
                 <form class="form-table" action="/admin/all" method="get">
                     <h2>Admin panel</h2>
                     <h3>All users in database:</h3>
@@ -91,9 +98,43 @@
                                     <td>
                                         <form action="/admin/edit" method="get">
                                             <button class="btn btn-primary btn-xs" type="submit" name="id" th:value="${user.id}">edit</button>
+                                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUser" th:value="${user.id}">edit</button>
+                                            <div id="editUser" class="modal fade">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button class="close" data-dismiss="modal">x</button>
+                                                            <h2 class="modal-title">Add user:</h2>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="/admin/add" method="post">
+                                                                First name:
+                                                                <input type="text" name="firstName">
+                                                                Last name:
+                                                                <input type="text" name="lastName">
+                                                                Phone number
+                                                                <input type="text" name="phoneNumber">
+                                                                Role
+                                                                <select name="role">
+                                                                    <option value="admin">admin</option>>
+                                                                    <option value="user">user</option>>
+                                                                </select>
+                                                                Login
+                                                                <input type="text" name="login">
+                                                                Password
+                                                                <input type="password" name="password">
+                                                                <input type="submit" value="Submit">
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-primary btn-xs" data-dismiss="modal">Close</button>
+                                                            <button class="btn btn-primary btn-xs">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </form>
                                     </td>
-
                                 </tr>
                             </th:block>
                         </tbody>
@@ -102,26 +143,5 @@
             </div>
         </div>
     </div>
-
-<!--Add user:-->
-<!--<form action="/admin/add" method="post">-->
-<!--    First name:-->
-<!--    <input type="text" name="firstName">-->
-<!--    Last name:-->
-<!--    <input type="text" name="lastName">-->
-<!--    Phone number-->
-<!--    <input type="text" name="phoneNumber">-->
-<!--    Role-->
-<!--    <select name="role">-->
-<!--        <option value="admin">admin</option>>-->
-<!--        <option value="user">user</option>>-->
-<!--    </select>-->
-<!--    Login-->
-<!--    <input type="text" name="login">-->
-<!--    Password-->
-<!--    <input type="password" name="password">-->
-<!--    <input type="submit" value="Submit">-->
-<!--</form>-->
-
 </body>
 </html>
