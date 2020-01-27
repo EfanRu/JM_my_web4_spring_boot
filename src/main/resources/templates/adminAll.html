@@ -25,92 +25,103 @@
             margin: auto;
         }
 
+
     </style>
 </head>
 
 <body>
+    <div class="input-group" style="background: black">
+        <h3 style="color: darkgray">My project</h3>
+        <span class="input-group-btn">
+            <form action="/logout" method="get" >
+                <button class="btn" style="background: black; color: darkgray">Log out</button>
+            </form>
+        </span>
+    </div>
 
-        <div class="input-group" style="background: black">
-            <h3 style="color: darkgray">My project</h3>
-            <span class="input-group-btn">
-                <form action="/logout" method="get" >
-                    <button class="btn" style="background: black; color: darkgray">Log out</button>
+    <div class="container-fluid" >
+        <div class="row-fluid flex">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-siderbar">
+                    <a href="/admin/all">admin</a>
+                    <a href="/admin/all">user</a>
+                </ul>
+            </div>
+            <div class="col-sm-9 col-md-10 main" style="background: rgba(187,186,195,0.47)">
+                <form class="form-table" action="/admin/all" method="get">
+                    <h2>Admin panel</h2>
+                    <h3>All users in database:</h3>
+
+                    <table class="table table-striped table-hover">
+                        <thread>
+                            <tr>
+                                <th>Id</th>
+                                <th>First name</th>
+                                <th>Second name</th>
+                                <th>Login</th>
+                                <th>Password</th>
+                                <th>Phone number</th>
+                                <th>Role</th>
+                                <th>Remove</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+                            <th:block th:each="user:${listUser}">
+                                <tr>
+                                    <td th:utext="${user.id}">id</td>
+                                    <td th:utext="${user.firstName}">first name</td>
+                                    <td th:utext="${user.lastName}">last name</td>
+                                    <td th:utext="${user.login}">login</td>
+                                    <td th:utext="${user.password}">password</td>
+                                    <td th:utext="${user.phoneNumber}">phone number</td>
+                                    <td th:utext="${user.role.name}">role</td>
+
+                                    <td>
+                                        <!--Hidden button need for deleting 1 row in the table. First button don't working((-->
+                                        <form action="/admin/delete" method="get">
+                                            <button hidden></button>
+                                        </form>
+
+                                        <form action="/admin/delete" method="get">
+                                            <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}">del</button>
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        <form action="/admin/edit" method="get">
+                                            <button class="btn btn-primary btn-xs" type="submit" name="id" th:value="${user.id}">edit</button>
+                                        </form>
+                                    </td>
+
+                                </tr>
+                            </th:block>
+                        </tbody>
+                    </table>
                 </form>
-            </span>
+            </div>
         </div>
+    </div>
 
-        <h2>Admin panel</h2>
-
-    <form class="form-table" action="/admin/all" method="get">
-        <h3>All users in database:</h3>
-
-        <table class="table table-striped">
-            <thread>
-                <tr>
-                    <th>Id</th>
-                    <th>First name</th>
-                    <th>Second name</th>
-                    <th>Login</th>
-                    <th>Password</th>
-                    <th>Phone number</th>
-                    <th>Role</th>
-                    <th>Remove</th>
-                    <th>Edit</th>
-                </tr>
-            </thread>
-            <tbody>
-                <th:block th:each="user:${listUser}">
-                    <tr>
-                        <th th:utext="${user.id}">id</th>
-                        <th th:utext="${user.firstName}">first name</th>
-                        <th th:utext="${user.lastName}">last name</th>
-                        <th th:utext="${user.login}">login</th>
-                        <th th:utext="${user.password}">password</th>
-                        <th th:utext="${user.phoneNumber}">phone number</th>
-                        <th th:utext="${user.role.name}">role</th>
-
-                        <th>
-                            <!--Hidden button need for deleting 1 row in the table. First button don't working((-->
-                            <form action="/admin/delete" method="get">
-                                <button hidden></button>
-                            </form>
-
-                            <form action="/admin/delete" method="get">
-                                <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}">del</button>
-                            </form>
-                        </th>
-
-                        <th>
-                            <form action="/admin/edit" method="get">
-                                <button class="btn btn-primary btn-xs" type="submit" name="id" th:value="${user.id}">edit</button>
-                            </form>
-                        </th>
-
-                    </tr>
-                </th:block>
-            </tbody>
-        </table>
-    </form>
-
-Add user:
-<form action="/admin/add" method="post">
-    First name:
-    <input type="text" name="firstName">
-    Last name:
-    <input type="text" name="lastName">
-    Phone number
-    <input type="text" name="phoneNumber">
-    Role
-    <select name="role">
-        <option value="admin">admin</option>>
-        <option value="user">user</option>>
-    </select>
-    Login
-    <input type="text" name="login">
-    Password
-    <input type="password" name="password">
-    <input type="submit" value="Submit">
-</form>
+<!--Add user:-->
+<!--<form action="/admin/add" method="post">-->
+<!--    First name:-->
+<!--    <input type="text" name="firstName">-->
+<!--    Last name:-->
+<!--    <input type="text" name="lastName">-->
+<!--    Phone number-->
+<!--    <input type="text" name="phoneNumber">-->
+<!--    Role-->
+<!--    <select name="role">-->
+<!--        <option value="admin">admin</option>>-->
+<!--        <option value="user">user</option>>-->
+<!--    </select>-->
+<!--    Login-->
+<!--    <input type="text" name="login">-->
+<!--    Password-->
+<!--    <input type="password" name="password">-->
+<!--    <input type="submit" value="Submit">-->
+<!--</form>-->
 
 </body>
 </html>
