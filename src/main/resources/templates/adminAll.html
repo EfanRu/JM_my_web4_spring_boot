@@ -21,8 +21,8 @@
     <style type="text/css">
 
         .form-table {
-            padding-left: 50px;
-            padding-right: 50px;
+            /*padding-left: 0px;*/
+            /*padding-right: 0px;*/
             margin: 0 auto;
         }
 
@@ -50,115 +50,135 @@
         </span>
     </div>
 
+
     <div class="container-fluid" >
         <div class="row-fluid flex">
             <div class="col-sm-2 col-md-2 sidebar">
                 <ul class="nav nav-siderbar">
                     <br>
                     <a href="/admin/all">admin</a><br>
-                    <a href="/admin/all">user</a>
+                    <a href="/user">user</a>
                 </ul>
             </div>
-            <div class="col-sm-10 col-md-10 main" style="background: rgba(187,186,195,0.47); min-height: 700px">
-                <form class="form-table" action="/admin/all" method="get">
+            <div class="col-sm-10 col-md-10 main" style="background: #d9d9d9; min-height: 700px">
+
                     <h2>Admin panel</h2>
-                    <h3>All users in database:</h3>
+<!--                    <h3>All users in database:</h3>-->
 
-                    <table class="table table-striped table-hover">
-                        <thread>
-                            <tr>
-                                <th>Id</th>
-                                <th>First name</th>
-                                <th>Second name</th>
-                                <th>Login</th>
-                                <th>Password</th>
-                                <th>Phone number</th>
-                                <th>Role</th>
-                                <th>Remove</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thread>
-                        <tbody>
-                            <th:block th:each="user:${listUser}">
-                                <tr>
-                                    <td th:utext="${user.id}">id</td>
-                                    <td th:utext="${user.firstName}">first name</td>
-                                    <td th:utext="${user.lastName}">last name</td>
-                                    <td th:utext="${user.login}">login</td>
-                                    <td th:utext="${user.password}">password</td>
-                                    <td th:utext="${user.phoneNumber}">phone number</td>
-                                    <td th:utext="${user.role.name}">role</td>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#table">User's table</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#newUser">New user</a>
+                        </li>
+                    </ul>
 
-                                    <td>
-                                        <!--Hidden button need for deleting 1 row in the table. First button don't working((-->
-                                        <form action="/admin/delete" method="get">
-                                            <button hidden></button>
-                                        </form>
+                    <div class="tab-content">
+                        <div id="table" class="tab-pane active fade in">
+                            <form class="form-table" action="/admin/all" method="get">
 
-                                        <form action="/admin/delete" method="get">
-                                            <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}"><span class="glyphicon glyphicon-trash"></span></button>
-                                        </form>
-                                    </td>
+                                <table class="table table-striped table-hover">
+                                    <thread>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>First name</th>
+                                            <th>Second name</th>
+                                            <th>Login</th>
+                                            <th>Password</th>
+                                            <th>Phone number</th>
+                                            <th>Role</th>
+                                            <th>Remove</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thread>
+                                    <tbody>
+                                    <th:block th:each="user:${listUser}">
+                                        <tr>
+                                            <td th:utext="${user.id}">id</td>
+                                            <td th:utext="${user.firstName}">first name</td>
+                                            <td th:utext="${user.lastName}">last name</td>
+                                            <td th:utext="${user.login}">login</td>
+                                            <td th:utext="${user.password}">password</td>
+                                            <td th:utext="${user.phoneNumber}">phone number</td>
+                                            <td th:utext="${user.role.name}">role</td>
 
-                                    <td>
-                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>
-                                        <div class="modal modal-warning fade in" th:id="modal-warning + ${user.id}" >
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">×</span></button>
-                                                        <h4 class="modal-title">Edit user</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="/admin/edit" method="post">
-                                                            Id: <input type="text" name="id" th:value="${user.id}">
-                                                            First name: <input type="text" name="firstName" th:value="${user.firstName}">
-                                                            Last name: <input type="text" name="lastName" th:value="${user.lastName}">
-                                                            Phone number: <input type="text" name="phoneNumber" th:value="${user.phoneNumber}">
-                                                            Role:   <select name = "role">
-                                                                        <option value="admin">admin</option>>
-                                                                        <option value="user">user</option>>
-                                                                    </select>
-                                                            Login: <input type="text" name="login" th:value="${user.login}">
-                                                            Password: <input type="password" name="password">
+                                            <td>
+                                                <!--Hidden button need for deleting 1 row in the table. First button don't working((-->
+                                                <form action="/admin/delete" method="get">
+                                                    <button hidden></button>
+                                                </form>
 
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-outline">Change</button>
+                                                <form action="/admin/delete" method="get">
+                                                    <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}"><span class="glyphicon glyphicon-trash"></span></button>
+                                                </form>
+                                            </td>
+
+                                            <td>
+                                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>
+                                                <div class="modal modal-warning fade in" th:id="modal-warning + ${user.id}" >
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span></button>
+                                                                <h4 class="modal-title">Edit user</h4>
                                                             </div>
-                                                        </form>
+                                                            <div class="modal-body">
+                                                                <form action="/admin/edit" method="post">
+                                                                    Id: <input type="text" name="id" th:value="${user.id}">
+                                                                    First name: <input type="text" name="firstName" th:value="${user.firstName}">
+                                                                    Last name: <input type="text" name="lastName" th:value="${user.lastName}">
+                                                                    Phone number: <input type="text" name="phoneNumber" th:value="${user.phoneNumber}">
+                                                                    Role:   <select name = "role">
+                                                                    <option value="admin">admin</option>>
+                                                                    <option value="user">user</option>>
+                                                                </select>
+                                                                    Login: <input type="text" name="login" th:value="${user.login}">
+                                                                    Password: <input type="password" name="password">
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-outline">Change</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </th:block>
-                        </tbody>
-                    </table>
-                </form>
+                                            </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div id="newUser" class="tab-pane fade">
+                            some fuck
+                            <form action="/admin/add" method="post">
+                                First name:
+                                <input type="text" name="firstName">
+                                Last name:
+                                <input type="text" name="lastName">
+                                Phone number
+                                <input type="text" name="phoneNumber">
+                                Role
+                                <select name="role">
+                                    <option value="admin">admin</option>>
+                                    <option value="user">user</option>>
+                                </select>
+                                Login
+                                <input type="text" name="login">
+                                Password
+                                <input type="password" name="password">
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
+                    </div>
+<!--                </form>-->
             </div>
         </div>
     </div>
+
 </body>
 </html>
-
-<!--<form action="/admin/add" method="post">-->
-<!--    First name:-->
-<!--    <input type="text" name="firstName">-->
-<!--    Last name:-->
-<!--    <input type="text" name="lastName">-->
-<!--    Phone number-->
-<!--    <input type="text" name="phoneNumber">-->
-<!--    Role-->
-<!--    <select name="role">-->
-<!--        <option value="admin">admin</option>>-->
-<!--        <option value="user">user</option>>-->
-<!--    </select>-->
-<!--    Login-->
-<!--    <input type="text" name="login">-->
-<!--    Password-->
-<!--    <input type="password" name="password">-->
-<!--    <input type="submit" value="Submit">-->
-<!--</form>-->
