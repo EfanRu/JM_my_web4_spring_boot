@@ -96,53 +96,12 @@
                                         </form>
 
                                         <form action="/admin/delete" method="get">
-                                            <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}">del</button>
+                                            <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}"><span class="glyphicon glyphicon-trash"></span></button>
                                         </form>
                                     </td>
 
                                     <td>
-                                        <form action="/admin/edit" method="get">
-                                            <button class="btn btn-primary btn-xs" type="submit" name="id" th:value="${user.id}">edit old</button>
-                                        </form>
-                                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editUser" th:attr="data-target='#editUser' + ${user}">edit new</button>
-                                        <div class="modal fade" th:id="'editUser' + ${user}">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button class="close" data-dismiss="modal">x</button>
-                                                        <h2 class="modal-title">Add user:</h2>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="/admin/edit" method="post">
-                                                            <p>Id: <input type="text" name="id" th:value="${user.id}"></p>
-                                                            <p>First name: <input type="text" name="firstName" th:value="${user.firstName}"></p>
-                                                            <p>Last name: <input type="text" name="lastName" th:value="${user.lastName}"></p>
-                                                            <p>Phone number: <input type="text" name="phoneNumber" th:value="${user.phoneNumber}"></p>
-                                                            <p>Role: <select name = "role">
-                                                                <option value="admin">admin</option>>
-                                                                <option value="user">user</option>>
-                                                            </select>
-                                                            </p>
-                                                            <p>Login: <input type="text" name="login" th:value="${user.login}"></p>
-                                                            <p>Password: <input type="password" name="password"></p>
-                                                            <input type="submit" value="Submit">
-                                                        </form>
-
-                                                        <form action="/logout" method="get">
-                                                            <input type="submit" value="Log out">
-                                                        </form>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary btn-xs" data-dismiss="modal">Close</button>
-                                                        <button class="btn btn-primary btn-xs">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--Example-->
-
-                                        <a data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${user.id}"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>
                                         <div class="modal modal-warning fade in" th:id="modal-warning + ${user.id}" >
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -165,44 +124,14 @@
                                                             Password: <input type="password" name="password">
 
                                                             <div class="modal-footer">
-
-
                                                                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
                                                                 <button type="submit" class="btn btn-outline">Change</button>
                                                             </div>
                                                         </form>
                                                     </div>
-<!--                                                    <div class="modal-footer">-->
-<!--                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>-->
-<!--                                                        <button type="submit" class="btn btn-outline">Change</button>-->
-<!--                                                        &lt;!&ndash;                                                        <a type="button" class="btn btn-outline" th:href="@{/user/delete/{id}(id=${user.id})}"><i class="fa fa-check"></i>&nbsp;Yes</a>&ndash;&gt;-->
-<!--                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
-
-
-<!--                                        <a data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${user.id }"><span class="glyphicon glyphicon-trash"></span></a>-->
-<!--                                        <div class="modal modal-warning fade in" th:id="modal-warning+${user.id }" >-->
-<!--                                            <div class="modal-dialog">-->
-<!--                                                <div class="modal-content">-->
-<!--                                                    <div class="modal-header">-->
-<!--                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                                            <span aria-hidden="true">×</span></button>-->
-<!--                                                        <h5 class="modal-title">Delete User</h5>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="modal-body">-->
-<!--                                                        <h3>Are you sure want to delete this user?</h3>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="modal-footer">-->
-<!--                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>-->
-<!--                                                        <a type="button" class="btn btn-outline" th:href="@{/user/delete/{id}(id=${user.id})}"><i class="fa fa-check"></i>&nbsp;Yes</a>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-
-
                                     </td>
                                 </tr>
                             </th:block>
