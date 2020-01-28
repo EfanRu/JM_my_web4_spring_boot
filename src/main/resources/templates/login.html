@@ -41,17 +41,14 @@
 
         <div>
             <h2 class="form-signin-heading">Login, motherfucker, do you have it?</h2>
-
-            <form class="form-signin">
-                <form action="/authorization" method="post">
+            <form class="form-signin" action="/authorization" method="post">
                     <input type="text" class="input-lg" placeholder="Login" name="username">
                     <input type="password" class="input-lg" placeholder="Password" name="password">
-                </form>
+                    <form class="form-signin-button">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
+                    </form>
             </form>
-            <form class="form-signin-button">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Sign in</button>
-            </form>
-
         </div>
+
     </body>
 </html>
