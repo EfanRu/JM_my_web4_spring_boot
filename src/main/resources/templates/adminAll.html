@@ -38,6 +38,34 @@
         margin-top: 30px;
     }
 
+    .bootstrap-select:not(.input-group-btn), .bootstrap-select[class*=col-] {
+        /*margin-left: auto;*/
+        /*margin-right: auto;*/
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0);
+        margin-bottom: 20px;
+    }
+
+    .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+        width: 220px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0);
+    }
+
+    element.style {
+        max-height: 306px;
+        overflow: hidden;
+        min-height: 42px;
+        position: relative;
+        /*transform: translate3d(0px, 34px, 0px);*/
+        transform: translate(-50%,0);
+        top: 0px;
+        left: 50%;
+        will-change: transform;
+    }
+
         /*.modal-open {*/
         /*    padding-right: 0 !important;*/
         /*}*/
@@ -70,14 +98,18 @@
             <div class="col-sm-2 col-md-2 sidebar">
                 <ul class="nav nav-siderbar">
                     <br>
-                    <a href="/admin/all">admin</a><br>
+                    <a href="/admin/all">admin</a>
+                    <br>
                     <a href="/user">user</a>
                 </ul>
             </div>
             <div class="col-sm-10 col-md-10 main" style="background: #d9d9d9; min-height: 700px">
-
                     <h2>Admin panel</h2>
 
+<!--                <ul class="nav nav-tabs">-->
+<!--                    <li class="active"><a id="tableUsersTab" data-toggle="tab" href="#tableUsers">Users table</a></li>-->
+<!--                    <li><a data-toggle="tab" href="#addUser">New User</a></li>-->
+<!--                </ul>-->
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active">
                             <a data-toggle="tab" role="tab" href="#table">User's table</a>
@@ -139,34 +171,47 @@
                                                                     <h4 class="modal-title">Edit user</h4>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <div class="form-group text-center">
+<!--                                                                    <div class="form-group text-center">-->
 
                                                                         <form action="/admin/edit" method="post">
-                                                                            <b>Id:</b><br>
-                                                                            <input class="input-lg" type="text" name="id" th:value="${user.id}"><br>
-                                                                            <b>First name:</b><br>
-                                                                            <input class="input-lg" type="text" name="firstName" th:value="${user.firstName}"><br>
-                                                                            <b>Last name:</b><br>
-                                                                            <input class="input-lg" type="text" name="lastName" th:value="${user.lastName}"><br>
-                                                                            <b>Phone number:</b><br>
-                                                                            <input class="input-lg" type="text" name="phoneNumber" th:value="${user.phoneNumber}"><br>
-                                                                            <b>Role:</b><br>
-                                                                            <select class="selectpicker" name = "role">
-                                                                            <option value="admin">admin</option>>
-                                                                            <option value="user">user</option>>
-                                                                            </select><br>
-                                                                            <b>Login:</b><br>
-                                                                            <input class="input-lg" type="text" name="login" th:value="${user.login}"><br>
-                                                                            <b>Password:</b><br>
-                                                                            <input class="input-lg" type="password" name="password">
-                                                                            <br>
+                                                                            <div class="form-group text-center">
+                                                                                <b>Id:</b><br>
+                                                                                <input class="input-lg" type="text" name="id" th:value="${user.id}"><br>
+                                                                                <b>First name:</b><br>
+                                                                                <input class="input-lg" type="text" name="firstName" th:value="${user.firstName}"><br>
+                                                                                <b>Last name:</b><br>
+                                                                                <input class="input-lg" type="text" name="lastName" th:value="${user.lastName}"><br>
+                                                                                <b>Phone number:</b><br>
+                                                                                <input class="input-lg" type="text" name="phoneNumber" th:value="${user.phoneNumber}"><br>
+                                                                            </div>
+                                                                                <!--                                                                            <b>Role:</b><br>-->
+<!--                                                                            <select class="selectpicker" name = "role">-->
+<!--                                                                            <option value="admin">admin</option>>-->
+<!--                                                                            <option value="user">user</option>>-->
+<!--                                                                            </select><br>-->
 
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                                                                                <button type="submit" class="btn btn-outline">Change</button>
+                                                                            <div class="text-center"><b>Role</b>
+                                                                            </div>
+                                                                            <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role">
+                                                                                <option value="admin">admin</option>
+                                                                                <option value="user">user</option>
+                                                                            </select>
+                                                                            <br>
+                                                                            <div class="form-group text-center">
+
+                                                                                <b>Login:</b><br>
+                                                                                <input class="input-lg" type="text" name="login" th:value="${user.login}"><br>
+                                                                                <b>Password:</b><br>
+                                                                                <input class="input-lg" type="password" name="password">
+                                                                                <br>
+
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                                                                    <button type="submit" class="btn btn-outline">Change</button>
+                                                                                </div>
                                                                             </div>
                                                                         </form>
-                                                                    </div>
+<!--                                                                    </div>-->
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -178,7 +223,7 @@
                                     </table>
                                 </form>
                             </div>
-                            <div id="newUser" role="tabpanel" class="tab-pane fade">
+                        <div id="newUser" role="tabpanel" class="tab-pane fade">
                                 <form action="/admin/add" method="post">
                                     <div class="form-group text-center">
                                         <b>First name:</b><br>
@@ -192,14 +237,15 @@
                                         <b>Phone number</b><br>
                                         <input type="text" class="input-lg" name="phoneNumber">
                                     </div>
-                                    <div class="form-group text-center">
-                                        <b>Role</b><br>
-                                        <!--class="selectpicker"-->
-                                        <select class="selectpicker" name = "role">
-                                            <option value="admin">admin</option>
-                                            <option value="user">user</option>
-                                        </select>
+<!--                                    <div class="form-group text-center">-->
+                                    <div class="text-center"><b>Role</b>
                                     </div>
+                                    <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role">
+                                        <option value="admin">admin</option>
+                                        <option value="user">user</option>
+                                    </select>
+                                    <!--                                    </div>-->
+                                    <!--class="selectpicker"-->
                                     <div class="form-group text-center">
                                         <b>Login</b><br>
                                         <input type="text" class="input-lg" name="login">
