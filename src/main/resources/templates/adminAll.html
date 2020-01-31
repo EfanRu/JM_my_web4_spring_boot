@@ -49,12 +49,16 @@
         transform: translate(-50%,0);
     }
 
+    input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].btn-block {
+        width: 100%;
+        margin: 5px;
+    }
+
     element.style {
         max-height: 306px;
         overflow: hidden;
         min-height: 42px;
         position: relative;
-        /*transform: translate3d(0px, 34px, 0px);*/
         transform: translate(-50%,0);
         top: 0px;
         left: 50%;
@@ -88,9 +92,9 @@
             <div class="col-sm-2 col-md-2 sidebar">
                 <ul class="nav nav-siderbar">
                     <br>
-                    <input type="button" class="btn-md btn-info btn-block" value="admin" onclick="location.href = '/admin/all';">
+                    <input type="button" class="btn-lg btn-info btn-block" value="admin" onclick="location.href = '/admin/all';">
                     <br>
-                    <input type="button" class="btn-md btn-info btn-block" value="user" onclick="location.href = '/user';">
+                    <input type="button" class="btn-lg btn-danger btn-block" value="user" onclick="location.href = '/user';">
                 </ul>
             </div>
             <div class="col-sm-10 col-md-10 main" style="background: #d9d9d9; min-height: 700px">
@@ -98,10 +102,10 @@
 
                 <ul class="nav nav-tabs md-pills pills-secondary flex-column" role="tablist">
                     <li class="nav-item">
-                        <button class="btn btn-info nav-link active" data-toggle="tab" href="#table" role="tab" aria-pressed="true">User's table</button>
+                        <a class="nav-link active" data-toggle="tab" href="#table" role="tab" aria-pressed="true">User's table</a>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-info nav-link" data-toggle="tab" href="#newUser" role="tab" aria-pressed="true">New user</button>
+                        <a class="nav-link" data-toggle="tab" href="#newUser" role="tab" aria-pressed="true">New user</a>
                     </li>
                 </ul>
 
@@ -165,12 +169,6 @@
                                                                         <b>Phone number:</b><br>
                                                                         <input class="input-lg" type="text" name="phoneNumber" th:value="${user.phoneNumber}"><br>
                                                                     </div>
-                                                                    <!--                                                                            <b>Role:</b><br>-->
-                                                                    <!--                                                                            <select class="selectpicker" name = "role">-->
-                                                                    <!--                                                                            <option value="admin">admin</option>>-->
-                                                                    <!--                                                                            <option value="user">user</option>>-->
-                                                                    <!--                                                                            </select><br>-->
-
                                                                     <div class="text-center"><b>Role</b>
                                                                     </div>
                                                                     <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role">
@@ -192,7 +190,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </form>
-                                                                <!--                                                                    </div>-->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -219,15 +216,12 @@
                                 <b>Phone number</b><br>
                                 <input type="text" class="input-lg" name="phoneNumber">
                             </div>
-                            <!--                                    <div class="form-group text-center">-->
                             <div class="text-center"><b>Role</b>
                             </div>
                             <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role">
                                 <option value="admin">admin</option>
                                 <option value="user">user</option>
                             </select>
-                            <!--                                    </div>-->
-                            <!--class="selectpicker"-->
                             <div class="form-group text-center">
                                 <b>Login</b><br>
                                 <input type="text" class="input-lg" name="login">
