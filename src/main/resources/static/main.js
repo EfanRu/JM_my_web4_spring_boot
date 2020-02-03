@@ -9,12 +9,18 @@ $(document).ready(function () {
 
     });
 
+
+
+    $('#allUser').bootstrap('refresh')
+
+
+    var table = document.getElementById ("allUser");
+    table.refresh ();
+
+
     var table = $('#allUser').DataTable();
 
-    table.ajax.reload( function ( json ) {
-        $('#refreshTable').val( json.lastInput );
-    } );
-
+    table.ajax.reload();
 
 });
 
@@ -59,5 +65,17 @@ function add_new_user_submit() {
 
         }
     });
+
+
+    $('#allUser').bootstrap('refresh')
+
+
+    var table = document.getElementById ("allUser");
+    table.refresh ();
+
+
+    var table = $('#allUser').DataTable();
+
+    table.ajax.reload();
 
 }
