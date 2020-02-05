@@ -20,7 +20,6 @@ $(document).ready(function () {
 
         edit_user_submit();
         refresh_user_table();
-
     });
 
     $("#deleteUser").submit(function (event) {
@@ -30,50 +29,16 @@ $(document).ready(function () {
 
         delete_user_submit();
         refresh_user_table();
-
     });
-
-    // var table = $('#allUser').DataTable( {
-    //     ajax: "data.json"
-    // } );
-    //
-    // setInterval( function () {
-    //     table.ajax.reload();
-    // }, 3000 );
-
-    //
-    //
-    // $('#allUser').bootstrap('refresh')
-
-    //
-    // var table = document.getElementById ("allUser");
-    // table.refresh ();
-
-    //
-    // var table = $('#allUser').DataTable( {
-    //     paging: false,
-    //     searching: false
-    // });
-    //
-    // table.ajax.reload();
-    //
-    // $.pjax.reload($('#allUser'), { type: "GET", timeout: 6000});
-
-
-
 });
 
 function refresh_user_table() {
     $.ajax({
         url: '/admin/all',
         type: 'GET',
-        // data: {
-        //     json: jsonData
-        // },
         dataType: "json",
         success: function (response) {
             var data = '';
-            // var table = $(this);
             $.each(response, function (index, value) {
                 data += '<tr>';
                 data += '<td>' + value.id + '</td>';
@@ -147,7 +112,6 @@ function refresh_user_table() {
             console.log("ERROR : ", e);
         }
     });
-
 }
 
 function add_new_user_submit() {
@@ -160,8 +124,6 @@ function add_new_user_submit() {
     user["login"] = $("#addLogin").val();
     user["password"] = $("#addPassword").val();
 
-    // $("#btn-addUser").prop("disabled", true);
-
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -171,42 +133,10 @@ function add_new_user_submit() {
         cache: false,
         timeout: 600000,
         success: function (data) {
-
-            // var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-            //     + JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
-            // $('#feedback').html(json);
-
             console.log("SUCCESS : ", data);
-            // refreshTable();
-
-            // $("#btn-addUser").prop("disabled", false);
-
-            // refreshTable();
-
-            //
-            // $('#allUser').bootstrap('refresh')
-            //
-            //
-            // var table = document.getElementById ("allUser");
-            // table.refresh ();
-            //
-            //
-            // var table = $('#allUser').DataTable();
-            //
-            // table.ajax.reload();
-            //
-            // $.pjax.reload($('#allUser'), { type: "GET", timeout: 6000});
-
         },
         error: function (e) {
-
-            // var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-            //     + e.responseText + "&lt;/pre&gt;";
-            // $('#feedback').html(json);
-            //
             console.log("ERROR : ", e);
-            // $("#btn-addUser").prop("disabled", false);
-
         }
     });
 
@@ -226,8 +156,6 @@ function edit_user_submit() {
     editUser["login"] = $("#editLogin").val();
     editUser["password"] = $("#editPassword").val();
 
-    // $("#btn-editUser").prop("disabled", true);
-
     $.ajax({
         type: "PUT",
         contentType: "application/json",
@@ -237,57 +165,14 @@ function edit_user_submit() {
         cache: false,
         timeout: 600000,
         success: function (data) {
-            //
-            // var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-            //     + JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
-            // $('#feedback').html(json);
-
             console.log("SUCCESS : ", data);
-
-            // refreshTable();
-
-            // $("#btn-editUser").prop("disabled", false);
-
-            // refreshTable();
-
-            //
-            // $('#allUser').bootstrap('refresh')
-            //
-            //
-            // var table = document.getElementById ("allUser");
-            // table.refresh ();
-            //
-            //
-            // var table = $('#allUser').DataTable();
-            //
-            // table.ajax.reload();
-            //
-            // $.pjax.reload($('#allUser'), { type: "GET", timeout: 6000});
-
         },
         error: function (e) {
-
-            // var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-            //     + e.responseText + "&lt;/pre&gt;";
-            // $('#feedback').html(json);
-
             console.log("ERROR : ", e);
-            // $("#btn-editUser").prop("disabled", false);
-
         }
     });
 
 }
-//
-// function refreshTable() {
-//     var table = $('#allUser').DataTable( {
-//         paging: false,
-//         searching: false,
-//         ajax: "data.json"
-//     } );
-//
-//     table.ajax.reload();
-// }
 
 function delete_user_submit() {
 
@@ -300,12 +185,9 @@ function delete_user_submit() {
         dataType: 'json',
         success: function (result) {
             console.log("SUCCESS : ", result);
-            // refreshTable();
         },
         error: function (e) {
             console.log("ERROR : ", e);
         }
     });
-
 }
-
