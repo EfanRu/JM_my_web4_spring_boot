@@ -73,6 +73,7 @@ function refresh_user_table() {
         dataType: "json",
         success: function (response) {
             var data = '';
+            // var table = $(this);
             $.each(response, function (index, value) {
                 data += '<tr>';
                 data += '<td>' + value.id + '</td>';
@@ -139,6 +140,7 @@ function refresh_user_table() {
                     '' +'</td>';
                 data += '</tr>';
             });
+            $('#user_table tr').remove();
             $('#user_table').append(data);
         },
         error: function (e) {
