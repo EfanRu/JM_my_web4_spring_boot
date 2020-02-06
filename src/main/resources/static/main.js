@@ -19,10 +19,10 @@ $(document).ready(function () {
 
 
     // $("#editUser").submit(function (event) {
-    $("#editUserBut").submit(function () {
+    $("#editUserBut").on('click', function (event) {
 
         //stop submit the form, we will post it manually.
-        // event.preventDefault();
+        event.preventDefault();
 
         edit_user_submit();
         // update_table();
@@ -32,10 +32,10 @@ $(document).ready(function () {
     });
 
     // $("#deleteUser").submit(function (event) {
-    $("#deleteUser").submit(function () {
+    $("#delId").on('click', function (event) {
 
         //stop submit the form, we will post it manually.
-        // event.preventDefault();
+        event.preventDefault();
 
         delete_user_submit();
         clean_user_table();
@@ -104,18 +104,65 @@ $(document).ready(function () {
                         data += '<td>' + value.phoneNumber + '</td>';
                         data += '<td>' + value.role.name + '</td>';
                         data += '<td>' + '' +
-                            '<form action="/admin" method="delete" id="deleteUserHid">\n' +
-                            '<button class="btn btn-danger btn-xs hidden" type="submit" name="id" value=' + value.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
-                            '</form>' +
-                            '<form action="/admin" method="delete" id="deleteUser">\n' +
+                            // '<form action="/admin" method="delete" id="deleteUserHid">\n' +
+                            // '<button class="btn btn-danger btn-xs hidden" type="submit" name="id" value=' + value.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                            // '</form>' +
+                            // '<form action="/admin" method="delete" id="deleteUser">\n' +
                             '<button class="btn btn-danger btn-xs" type="submit" name="id" value=' + value.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
-                            '</form>' +
+                            // '</form>' +
                             '' +'</td>';
                         data += '<td>' + '' +
-                            // '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" attr="data-target=\'#modal-warning\'' + value.id + '">edit</button>\n' +
-                            '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" attr="data-target=\'#modal-warning\'">edit</button>\n' +
+                            '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" attr="data-target=\'#modal-warning\'' + value.id + '" id="editUserBut">edit</button>\n' +
+                            '                            <div class="modal modal-warning fade in" id="modal-warning"' + value.id + '>\n' +
+                            '                                <div class="modal-dialog">\n' +
+                            '                                    <div class="modal-content">\n' +
+                            '                                        <div class="modal-header">\n' +
+                            '                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+                            '                                                <span aria-hidden="true">×</span></button>\n' +
+                            '                                            <h4 class="modal-title">Edit user</h4>\n' +
+                            '                                        </div>\n' +
+                            '                                        <div class="modal-body">\n' +
+                            '                                            <form action="/admin" method="put" id="editUser">\n' +
+                            '                                                <div class="form-group text-center">\n' +
+                            '                                                    <b>Id:</b><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="id" value="' + value.id + '" id="editId"><br>\n' +
+                            '                                                    <b>First name:</b><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="firstName" value="' + value.firstName + '" id="editFirstName"><br>\n' +
+                            '                                                    <b>Last name:</b><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="lastName" value="' + value.lastName + '" id="editLastName"><br>\n' +
+                            '                                                    <b>Phone number:</b><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + value.phoneNumber + '" id="editPhoneNumber"><br>\n' +
+                            '                                                </div>\n' +
+                            '                                                <div class="text-center"><b>Role</b>\n' +
+                            '                                                </div>\n' +
+                            '                                                <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="editRole">\n' +
+                            '                                                    <option value="admin">admin</option>\n' +
+                            '                                                    <option value="user">user</option>\n' +
+                            '                                                </select>\n' +
+                            '                                                <br>\n' +
+                            '                                                <div class="form-group text-center">\n' +
+                            '\n' +
+                            '                                                    <b>Login:</b><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="login" value="' + value.login +'" id="editLogin"><br>\n' +
+                            '                                                    <b>Password:</b><br>\n' +
+                            '                                                    <input class="input-lg" type="password" name="password" id="editPassword">\n' +
+                            '                                                    <br>\n' +
+                            '\n' +
+                            '                                                    <div class="modal-footer">\n' +
+                            '                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>\n' +
+                            '                                                        <button type="submit" class="btn btn-outline">Change</button>\n' +
+                            '                                                    </div>\n' +
+                            '                                                </div>\n' +
+                            '                                            </form>\n' +
+                            '                                        </div>\n' +
+                            '                                    </div>\n' +
+                            '                                </div>\n' +
+                            '                            </div>';
                             '' +'</td>';
                         data += '</tr>';
+
+                        // data += '</table>\n';
+
                     });
                     // $('#user_table tr').remove();
                     $('#user_table').append(data);
