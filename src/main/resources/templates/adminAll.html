@@ -126,7 +126,95 @@
                                 </tr>
                                 </thead>
                                 <tbody id="user_table"></tbody>
+<!--                                <tbody id="allUsers"></tbody>-->
+<!--                                <tbody id="user_table">-->
+<!--                                <tbody>-->
+<!--                                <th:block th:each="user:${listUser}" >-->
+<!--                                    <tr>-->
+<!--                                        <td th:value="${user.id}" id="idAllUsers"></td>-->
+<!--                                        <td id="user_table"></td>-->
+<!--                                        <td id="allUsers"></td>-->
+<!--                                        <td th:utext="${user.id}">id</td>-->
+<!--                                        <td th:utext="${user.firstName}">first name</td>-->
+<!--                                        <td th:utext="${user.lastName}">last name</td>-->
+<!--                                        <td th:utext="${user.login}">login</td>-->
+<!--                                        <td th:utext="${user.phoneNumber}">phone number</td>-->
+<!--                                        <td th:utext="${user.role.name}">role</td>-->
+
+<!--                                        <td>-->
+<!--                                            <form action="/admin" method="delete" id="deleteUserHid">-->
+<!--                                                <button class="btn btn-danger btn-xs hidden" type="submit" name="id" th:value="${user.id}"><span class="glyphicon glyphicon-trash"></span></button>-->
+<!--                                            </form>-->
+
+<!--                                            <form action="/admin" method="delete" id="deleteUser">-->
+<!--                                                <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}" id="delId"><span class="glyphicon glyphicon-trash"></span></button>-->
+<!--                                            </form>-->
+<!--                                        </td>-->
+
+<!--                                        <td>-->
+<!--                                            <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>-->
+<!--
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                </th:block>-->
+<!--                                </tbody>-->
                             </table>
+
+
+                            <th:block th:each="user:${listUser}" >
+
+                            <!--                            <div class="modal modal-warning fade in" th:id="modal-warning + ${user.id}" >-->
+                            <div class="modal modal-warning fade in" id="modal-warning" >
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title">Edit user</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin" method="put" id="editUser">
+                                                <div class="form-group text-center">
+                                                    <b>Id:</b><br>
+<!--                                                    <input class="input-lg" type="text" name="id" th:value="${user.id}" id="editId"><br>-->
+                                                    <input class="input-lg" type="text" name="id" th:value="${user.id}" id="editId"><br>
+                                                    <b>First name:</b><br>
+<!--                                                    <input class="input-lg" type="text" name="firstName" th:value="${user.firstName}" id="editFirstName"><br>-->
+                                                    <input class="input-lg" type="text" name="firstName" id="editFirstName"><br>
+                                                    <b>Last name:</b><br>
+<!--                                                    <input class="input-lg" type="text" name="lastName" th:value="${user.lastName}" id="editLastName"><br>-->
+                                                    <input class="input-lg" type="text" name="lastName" id="editLastName"><br>
+                                                    <b>Phone number:</b><br>
+<!--                                                    <input class="input-lg" type="text" name="phoneNumber" th:value="${user.phoneNumber}" id="editPhoneNumber"><br>-->
+                                                    <input class="input-lg" type="text" name="phoneNumber" id="editPhoneNumber"><br>
+                                                </div>
+                                                <div class="text-center"><b>Role</b>
+                                                </div>
+                                                <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="editRole">
+                                                    <option value="admin">admin</option>
+                                                    <option value="user">user</option>
+                                                </select>
+                                                <br>
+                                                <div class="form-group text-center">
+
+                                                    <b>Login:</b><br>
+<!--                                                    <input class="input-lg" type="text" name="login" th:value="${user.login}" id="editLogin"><br>-->
+                                                    <input class="input-lg" type="text" name="login" id="editLogin"><br>
+                                                    <b>Password:</b><br>
+                                                    <input class="input-lg" type="password" name="password" id="editPassword">
+                                                    <br>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-outline" id="editUserBut">Change</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </th:block>
 
 
 

@@ -129,6 +129,32 @@ public class AppController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/admin/{id}")
+    public ResponseEntity<?> getUser(@Valid @PathVariable String id, Errors errors) {
+        AjaxResponseBody result = new AjaxResponseBody();
+        ArrayList<User> list = new ArrayList<>();
+        User user;
+
+        if (errors.hasErrors()) {
+
+            result.setMsg(errors.getAllErrors()
+                    .stream().map(x -> x.getDefaultMessage())
+                    .collect(Collectors.joining(",")));
+
+            return ResponseEntity.badRequest().body(result);
+        }
+
+        if ((user = userService.getUserById(id)) != null) {
+            result.setMsg("success");
+        } else {
+            result.setMsg("no user found!");
+        }
+        list.add(user);
+        result.setResult(list);
+
+        return ResponseEntity.ok(result);
+    }
+
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
     public ModelAndView editUserPage(@ModelAttribute("id") String id, ModelMap model) {
         User user = userService.getUserById(id);
