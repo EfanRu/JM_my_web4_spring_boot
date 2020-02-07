@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     // update_table();
-    clean_user_table();
-    refresh_user_table();
+    // clean_user_table();
+    // refresh_user_table();
 
     $("#addUser").submit(function (event) {
 
@@ -10,39 +10,48 @@ $(document).ready(function () {
         event.preventDefault();
 
         add_new_user_submit();
-        clean_user_table();
+        // clean_user_table();
         // update_table();
-        refresh_user_table();
+        // refresh_user_table();
         // clean_user_table();
 
     });
 
 
     // $("#editUser").submit(function (event) {
-    $("#editUserBut").on('click', function (event) {
+    // $("#editUser").on("click", function (event) {
 
-        //stop submit the form, we will post it manually.
+    $('.editFromClass').submit(function (event) {
+
         event.preventDefault();
 
-        edit_user_submit();
-        // update_table();
-        clean_user_table();
-        refresh_user_table();
-        // clean_user_table();
+        var editUserId = $(this).attr('id');
+        $('#' + editUserId).submit(function (event) {
+
+            //stop submit the form, we will post it manually.
+            event.preventDefault();
+
+            edit_user_submit(editUserId);
+            // update_table();
+            // clean_user_table();
+            // refresh_user_table();
+            // clean_user_table();
+        });
     });
 
+
     // $("#deleteUser").submit(function (event) {
-    $("#delId").on('click', function (event) {
+    $("#deleteUser").submit(function (event) {
 
         //stop submit the form, we will post it manually.
         event.preventDefault();
 
         delete_user_submit();
-        clean_user_table();
+        // clean_user_table();
 
         // update_table();
 
-        refresh_user_table();
+        // refresh_user_table();
         // clean_user_table();
     });
 
@@ -95,25 +104,25 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (response) {
                     var data = '';
-                    $.each(response, function (index, value) {
+                    $.each(response, function (index, user) {
                         data += '<tr>';
-                        data += '<td>' + value.id + '</td>';
-                        data += '<td>' + value.firstName + '</td>';
-                        data += '<td>' + value.lastName + '</td>';
-                        data += '<td>' + value.login + '</td>';
-                        data += '<td>' + value.phoneNumber + '</td>';
-                        data += '<td>' + value.role.name + '</td>';
+                        data += '<td>' + user.id + '</td>';
+                        data += '<td>' + user.firstName + '</td>';
+                        data += '<td>' + user.lastName + '</td>';
+                        data += '<td>' + user.login + '</td>';
+                        data += '<td>' + user.phoneNumber + '</td>';
+                        data += '<td>' + user.role.name + '</td>';
                         data += '<td>' + '' +
-                            // '<form action="/admin" method="delete" id="deleteUserHid">\n' +
-                            // '<button class="btn btn-danger btn-xs hidden" type="submit" name="id" value=' + value.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
-                            // '</form>' +
-                            // '<form action="/admin" method="delete" id="deleteUser">\n' +
-                            '<button class="btn btn-danger btn-xs" type="submit" name="id" value=' + value.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
-                            // '</form>' +
+                            '<form action="/admin" method="delete" id="deleteUserHid">\n' +
+                            '<button class="btn btn-danger btn-xs hidden" type="submit" name="id" value=' + user.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                            '</form>' +
+                            '<form action="/admin" method="delete" id="deleteUser">\n' +
+                            '<button class="btn btn-danger btn-xs" type="submit" name="id" value=' + user.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                            '</form>' +
                             '' +'</td>';
                         data += '<td>' + '' +
-                            '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" attr="data-target=\'#modal-warning\'' + value.id + '" id="editUserBut">edit</button>\n' +
-                            '                            <div class="modal modal-warning fade in" id="modal-warning"' + value.id + '>\n' +
+                            '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" attr="data-target=#modal-warning' + user.id + '">edit</button>\n' +
+                            '                            <div class="modal modal-warning fade in" id="modal-warning' + user.id + '">\n' +
                             '                                <div class="modal-dialog">\n' +
                             '                                    <div class="modal-content">\n' +
                             '                                        <div class="modal-header">\n' +
@@ -125,13 +134,13 @@ $(document).ready(function () {
                             '                                            <form action="/admin" method="put" id="editUser">\n' +
                             '                                                <div class="form-group text-center">\n' +
                             '                                                    <b>Id:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="id" value="' + value.id + '" id="editId"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editId"><br>\n' +
                             '                                                    <b>First name:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="firstName" value="' + value.firstName + '" id="editFirstName"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="firstName" value="' + user.firstName + '" id="editFirstName"><br>\n' +
                             '                                                    <b>Last name:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="lastName" value="' + value.lastName + '" id="editLastName"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="lastName" value="' + user.lastName + '" id="editLastName"><br>\n' +
                             '                                                    <b>Phone number:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + value.phoneNumber + '" id="editPhoneNumber"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + user.phoneNumber + '" id="editPhoneNumber"><br>\n' +
                             '                                                </div>\n' +
                             '                                                <div class="text-center"><b>Role</b>\n' +
                             '                                                </div>\n' +
@@ -143,7 +152,7 @@ $(document).ready(function () {
                             '                                                <div class="form-group text-center">\n' +
                             '\n' +
                             '                                                    <b>Login:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="login" value="' + value.login +'" id="editLogin"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="login" value="' + user.login +'" id="editLogin"><br>\n' +
                             '                                                    <b>Password:</b><br>\n' +
                             '                                                    <input class="input-lg" type="password" name="password" id="editPassword">\n' +
                             '                                                    <br>\n' +
@@ -165,7 +174,8 @@ $(document).ready(function () {
 
                     });
                     // $('#user_table tr').remove();
-                    $('#user_table').append(data);
+                    // $('#user_table').append(data);
+                    $('#user_table').html(data);
                 },
                 error: function (e) {
                     console.log("ERROR : ", e);
@@ -202,18 +212,18 @@ $(document).ready(function () {
         }
 
 
-        function edit_user_submit() {
+        function edit_user_submit(id) {
 
-            var id = $("#editId").val();
+            // var id = $("#editId").val();
 
             var editUser = {}
-            editUser["id"] = $("#editId").val();
-            editUser["firstName"] = $("#editFirstName").val();
-            editUser["lastName"] = $("#editLastName").val();
-            editUser["phoneNumber"] = $("#editPhoneNumber").val();
-            editUser["role"] = $("#editRole").val();
-            editUser["login"] = $("#editLogin").val();
-            editUser["password"] = $("#editPassword").val();
+            editUser["id"] = $('#editId' + id).val();
+            editUser["firstName"] = $('#editFirstName' + id).val();
+            editUser["lastName"] = $('#editLastName' + id).val();
+            editUser["phoneNumber"] = $('#editPhoneNumber' + id).val();
+            editUser["role"] = $('#editRole' + id).val();
+            editUser["login"] = $('#editLogin' + id).val();
+            editUser["password"] = $('#editPassword' + id).val();
 
             $.ajax({
                 type: "PUT",
