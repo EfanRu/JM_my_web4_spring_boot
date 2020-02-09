@@ -1,8 +1,58 @@
 $(document).ready(function () {
 
     // update_table();
-    // clean_user_table();
-    // refresh_user_table();
+    clean_user_table();
+    refresh_user_table();
+
+    $("button[data-toggle=modal]").click(function() {
+        var id = $(this).attr('id');
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/admin/" + id,
+            // url: "/admin/all",
+            dataType: 'json',
+            success: function (user) {
+                console.log("SUCCESS : ", user);
+                var data = '';
+
+                data += '\n' +
+                    '                                            <form class="editFromClass" action="/admin" method="put" id="' + user.id + '">\n' +
+                    '                                                <div class="form-group text-center">\n' +
+                    '                                                    <b>Id:</b><br>\n' +
+                    '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editUser' + user.id + '"><br>\n' +
+                    '                                                    <b>First name:</b><br>\n' +
+                    '                                                    <input class="input-lg" type="text" name="firstName" value="' + user.firstName + '" id="editFirstName' + user.id + '"><br>\n' +
+                    '                                                    <b>Last name:</b><br>\n' +
+                    '                                                    <input class="input-lg" type="text" name="lastName" value="' + user.lastName + '" id="editLastName' + user.id + '"><br>\n' +
+                    '                                                    <b>Phone number:</b><br>\n' +
+                    '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + user.phoneNumber + '" id="editPhoneNumber' + user.id + '"><br>\n' +
+                    '                                                </div>\n' +
+                    '                                                <div class="text-center"><b>Role</b>\n' +
+                    '                                                </div>\n' +
+                    '                                                <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="editRole' + user.id + '">\n' +
+                    '                                                    <option value="admin">admin</option>\n' +
+                    '                                                    <option value="user">user</option>\n' +
+                    '                                                </select>\n' +
+                    '                                                <br>\n' +
+                    '                                                <div class="form-group text-center">\n' +
+                    '\n' +
+                    '                                                    <b>Login:</b><br>\n' +
+                    '                                                    <input class="input-lg" type="text" name="login" value="' + user.login + '" id="editLogin' + user.id + '"><br>\n' +
+                    '                                                    <b>Password:</b><br>\n' +
+                    '                                                    <input class="input-lg" type="password" name="password" id="editPassword' + user.id + '">\n' +
+                    '                                                    <br>';
+
+                $('#modal-warning').show();
+                $('#modalContent').html(data);
+            },
+            error: function (e) {
+                console.log("ERROR : ", e);
+            }
+        });
+
+    });
 
     $("#addUser").submit(function (event) {
 
@@ -10,9 +60,9 @@ $(document).ready(function () {
         event.preventDefault();
 
         add_new_user_submit();
-        // clean_user_table();
+        clean_user_table();
         // update_table();
-        // refresh_user_table();
+        refresh_user_table();
         // clean_user_table();
     });
 
@@ -24,8 +74,8 @@ $(document).ready(function () {
         $('#' + editUserId).on(edit_user_submit(editUserId));
 
         // update_table();
-        // clean_user_table();
-        // refresh_user_table();
+        clean_user_table();
+        refresh_user_table();
         // clean_user_table();
     });
 
@@ -38,12 +88,11 @@ $(document).ready(function () {
         var delUserId = $(this).attr('id');
         $('#' + delUserId).on(delete_user_submit(delUserId));
 
-        // delete_user_submit();
-        // clean_user_table();
+        clean_user_table();
 
         // update_table();
 
-        // refresh_user_table();
+        refresh_user_table();
         // clean_user_table();
     });
 
@@ -104,63 +153,104 @@ $(document).ready(function () {
                         data += '<td>' + user.login + '</td>';
                         data += '<td>' + user.phoneNumber + '</td>';
                         data += '<td>' + user.role.name + '</td>';
-                        data += '<td>' + '' +
-                            '<form action="/admin" method="delete" id="deleteUserHid">\n' +
-                            '<button class="btn btn-danger btn-xs hidden" type="submit" name="id" value=' + user.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
-                            '</form>' +
-                            '<form action="/admin" method="delete" id="deleteUser">\n' +
-                            '<button class="btn btn-danger btn-xs" type="submit" name="id" value=' + user.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
-                            '</form>' +
-                            '' +'</td>';
-                        data += '<td>' + '' +
-                            '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" attr="data-target=#modal-warning' + user.id + '">edit</button>\n' +
-                            '                            <div class="modal modal-warning fade in" id="modal-warning' + user.id + '">\n' +
-                            '                                <div class="modal-dialog">\n' +
-                            '                                    <div class="modal-content">\n' +
-                            '                                        <div class="modal-header">\n' +
-                            '                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
-                            '                                                <span aria-hidden="true">×</span></button>\n' +
-                            '                                            <h4 class="modal-title">Edit user</h4>\n' +
-                            '                                        </div>\n' +
-                            '                                        <div class="modal-body">\n' +
-                            '                                            <form action="/admin" method="put" id="editUser">\n' +
-                            '                                                <div class="form-group text-center">\n' +
-                            '                                                    <b>Id:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editId' + user.id + '"><br>\n' +
-                            '                                                    <b>First name:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="firstName" value="' + user.firstName + '" id="editFirstName' + user.id + '"><br>\n' +
-                            '                                                    <b>Last name:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="lastName" value="' + user.lastName + '" id="editLastName' + user.id + '"><br>\n' +
-                            '                                                    <b>Phone number:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + user.phoneNumber + '" id="editPhoneNumber' + user.id + '"><br>\n' +
-                            '                                                </div>\n' +
-                            '                                                <div class="text-center"><b>Role</b>\n' +
-                            '                                                </div>\n' +
-                            '                                                <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="editRole' + user.id + '">\n' +
-                            '                                                    <option value="admin">admin</option>\n' +
-                            '                                                    <option value="user">user</option>\n' +
-                            '                                                </select>\n' +
-                            '                                                <br>\n' +
-                            '                                                <div class="form-group text-center">\n' +
+                        data += '<td>' +
+                            '                                                <form action="/admin" method="delete" id="deleteUserHid">\n' +
+                            '                                                    <button class="btn btn-danger btn-xs hidden" type="submit" name="id" th:value="${user.id}"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                            '                                                </form>\n' +
                             '\n' +
-                            '                                                    <b>Login:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="login" value="' + user.login +'" id="editLogin' + user.id + '"><br>\n' +
-                            '                                                    <b>Password:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="password" name="password" id="editPassword' + user.id + '">\n' +
-                            '                                                    <br>\n' +
+                            '                                                <form class="deleteFromClass" action="/admin" method="delete" th:id="${user.id}">\n' +
+                            '                                                    <button class="btn btn-danger btn-xs" type="submit" name="id" th:value="${user.id}" id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                            '                                                </form>\n' +
+                            '                                            </td>\n' +
                             '\n' +
-                            '                                                    <div class="modal-footer">\n' +
-                            '                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>\n' +
-                            '                                                        <button type="submit" class="btn btn-outline">Change</button>\n' +
+                            '                                            <td>\n' +
+                            '                                                <form class="editFromClass" th:id="${user.id}">\n' +
+                            '                                                    <button href="#modal-warning" type="button" class="btn btn-primary btn-xs" data-toggle="modal" th:id="${user.id}">edit</button>\n' +
+                            '            <!--                            Modal window-->\n' +
+                            '                                                    <div class="modal modal-warning fade in" id="modal-warning">\n' +
+                            '                                                        <div class="modal-dialog">\n' +
+                            '                                                            <div class="modal-content">\n' +
+                            '                                                                <div class="modal-header">\n' +
+                            '                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+                            '                                                                        <span aria-hidden="true">×</span></button>\n' +
+                            '                                                                    <h4 class="modal-title">Edit user</h4>\n' +
+                            '                                                                </div>\n' +
+                            '                                                                <div class="modal-body">\n' +
+                            '                                                                    <div id="modalContent"></div>\n' +
+                            '                                                                </div>\n' +
+                            '                                                                <div class="modal-footer">\n' +
+                            '                                                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>\n' +
+                            '                                                                    <button type="submit" class="btn btn-outline">Change</button>\n' +
+                            '                                                                </div>;\n' +
+                            '                                                            </div>\n' +
+                            '                                                        </div>\n' +
                             '                                                    </div>\n' +
-                            '                                                </div>\n' +
-                            '                                            </form>\n' +
-                            '                                        </div>\n' +
-                            '                                    </div>\n' +
-                            '                                </div>\n' +
-                            '                            </div>';
-                            '' +'</td>';
-                        data += '</tr>';
+                            '                                                </form>\n' +
+                            '                                            </td>\n' +
+                            '                                        </tr>\n';
+
+
+
+
+
+
+
+                        //     '<form action="/admin" method="delete" id="deleteUserHid">\n' +
+                        //     '<button class="btn btn-danger btn-xs hidden" type="submit" name="id" value=' + user.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                        //     '</form>' +
+                        //     '<form action="/admin" method="delete" id="deleteUser">\n' +
+                        //     '<button class="btn btn-danger btn-xs" type="submit" name="id" value=' + user.id + ' id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                        //     '</form>' +
+                        //     '' +'</td>';
+                        // data += '<td>' + '' +
+                        //     '<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-warning" attr="data-target=#modal-warning' + user.id + '">edit</button>\n' +
+                        //     '                            <div class="modal modal-warning fade in" id="modal-warning' + user.id + '">\n' +
+                        //     '                                <div class="modal-dialog">\n' +
+                        //     '                                    <div class="modal-content">\n' +
+                        //     '                                        <div class="modal-header">\n' +
+                        //     '                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n' +
+                        //     '                                                <span aria-hidden="true">×</span></button>\n' +
+                        //     '                                            <h4 class="modal-title">Edit user</h4>\n' +
+                        //     '                                        </div>\n' +
+                        //     '                                        <div class="modal-body">\n' +
+                        //     '                                            <form action="/admin" method="put" id="editUser">\n' +
+                        //     '                                                <div class="form-group text-center">\n' +
+                        //     '                                                    <b>Id:</b><br>\n' +
+                        //     '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editId' + user.id + '"><br>\n' +
+                        //     '                                                    <b>First name:</b><br>\n' +
+                        //     '                                                    <input class="input-lg" type="text" name="firstName" value="' + user.firstName + '" id="editFirstName' + user.id + '"><br>\n' +
+                        //     '                                                    <b>Last name:</b><br>\n' +
+                        //     '                                                    <input class="input-lg" type="text" name="lastName" value="' + user.lastName + '" id="editLastName' + user.id + '"><br>\n' +
+                        //     '                                                    <b>Phone number:</b><br>\n' +
+                        //     '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + user.phoneNumber + '" id="editPhoneNumber' + user.id + '"><br>\n' +
+                        //     '                                                </div>\n' +
+                        //     '                                                <div class="text-center"><b>Role</b>\n' +
+                        //     '                                                </div>\n' +
+                        //     '                                                <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="editRole' + user.id + '">\n' +
+                        //     '                                                    <option value="admin">admin</option>\n' +
+                        //     '                                                    <option value="user">user</option>\n' +
+                        //     '                                                </select>\n' +
+                        //     '                                                <br>\n' +
+                        //     '                                                <div class="form-group text-center">\n' +
+                        //     '\n' +
+                        //     '                                                    <b>Login:</b><br>\n' +
+                        //     '                                                    <input class="input-lg" type="text" name="login" value="' + user.login +'" id="editLogin' + user.id + '"><br>\n' +
+                        //     '                                                    <b>Password:</b><br>\n' +
+                        //     '                                                    <input class="input-lg" type="password" name="password" id="editPassword' + user.id + '">\n' +
+                        //     '                                                    <br>\n' +
+                        //     '\n' +
+                        //     '                                                    <div class="modal-footer">\n' +
+                        //     '                                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>\n' +
+                        //     '                                                        <button type="submit" class="btn btn-outline">Change</button>\n' +
+                        //     '                                                    </div>\n' +
+                        //     '                                                </div>\n' +
+                        //     '                                            </form>\n' +
+                        //     '                                        </div>\n' +
+                        //     '                                    </div>\n' +
+                        //     '                                </div>\n' +
+                        //     '                            </div>';
+                        //     '' +'</td>';
+                        // data += '</tr>';
 
                         // data += '</table>\n';
 
@@ -202,7 +292,6 @@ $(document).ready(function () {
             });
 
         }
-
 
         function edit_user_submit(id) {
 

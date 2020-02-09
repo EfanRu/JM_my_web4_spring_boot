@@ -1,8 +1,8 @@
-package com.example.jm_my_web4_spring_boot.controller;
+package com.example.springboot.controller;
 
-import com.example.jm_my_web4_spring_boot.model.AjaxResponseBody;
-import com.example.jm_my_web4_spring_boot.model.User;
-import com.example.jm_my_web4_spring_boot.service.UserService;
+import com.example.springboot.model.AjaxResponseBody;
+import com.example.springboot.model.User;
+import com.example.springboot.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -130,29 +130,14 @@ public class AppController {
     }
 
     @GetMapping("/admin/{id}")
-    public ResponseEntity<?> getUser(@Valid @PathVariable String id, Errors errors) {
-        AjaxResponseBody result = new AjaxResponseBody();
-        ArrayList<User> list = new ArrayList<>();
+    public User getUser(@Valid @ModelAttribute("id") String id, Errors errors) {
         User user;
 
-        if (errors.hasErrors()) {
-
-            result.setMsg(errors.getAllErrors()
-                    .stream().map(x -> x.getDefaultMessage())
-                    .collect(Collectors.joining(",")));
-
-            return ResponseEntity.badRequest().body(result);
-        }
-
         if ((user = userService.getUserById(id)) != null) {
-            result.setMsg("success");
+            return user;
         } else {
-            result.setMsg("no user found!");
+            return null;
         }
-        list.add(user);
-        result.setResult(list);
-
-        return ResponseEntity.ok(result);
     }
 
     @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
