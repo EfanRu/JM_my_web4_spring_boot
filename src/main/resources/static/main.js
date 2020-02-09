@@ -14,39 +14,31 @@ $(document).ready(function () {
         // update_table();
         // refresh_user_table();
         // clean_user_table();
-
     });
 
-
-    // $("#editUser").submit(function (event) {
-    // $("#editUser").on("click", function (event) {
-
-    $('.editFromClass').submit(function (event) {
+    $('.editFromClass').on('submit', function (event) {
 
         event.preventDefault();
 
         var editUserId = $(this).attr('id');
-        $('#' + editUserId).submit(function (event) {
+        $('#' + editUserId).on(edit_user_submit(editUserId));
 
-            //stop submit the form, we will post it manually.
-            event.preventDefault();
-
-            edit_user_submit(editUserId);
-            // update_table();
-            // clean_user_table();
-            // refresh_user_table();
-            // clean_user_table();
-        });
+        // update_table();
+        // clean_user_table();
+        // refresh_user_table();
+        // clean_user_table();
     });
 
 
-    // $("#deleteUser").submit(function (event) {
-    $("#deleteUser").submit(function (event) {
+    $(".deleteFromClass").on('submit', function (event) {
 
         //stop submit the form, we will post it manually.
         event.preventDefault();
 
-        delete_user_submit();
+        var delUserId = $(this).attr('id');
+        $('#' + delUserId).on(delete_user_submit(delUserId));
+
+        // delete_user_submit();
         // clean_user_table();
 
         // update_table();
@@ -134,17 +126,17 @@ $(document).ready(function () {
                             '                                            <form action="/admin" method="put" id="editUser">\n' +
                             '                                                <div class="form-group text-center">\n' +
                             '                                                    <b>Id:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editId"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editId' + user.id + '"><br>\n' +
                             '                                                    <b>First name:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="firstName" value="' + user.firstName + '" id="editFirstName"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="firstName" value="' + user.firstName + '" id="editFirstName' + user.id + '"><br>\n' +
                             '                                                    <b>Last name:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="lastName" value="' + user.lastName + '" id="editLastName"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="lastName" value="' + user.lastName + '" id="editLastName' + user.id + '"><br>\n' +
                             '                                                    <b>Phone number:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + user.phoneNumber + '" id="editPhoneNumber"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="phoneNumber" value="' + user.phoneNumber + '" id="editPhoneNumber' + user.id + '"><br>\n' +
                             '                                                </div>\n' +
                             '                                                <div class="text-center"><b>Role</b>\n' +
                             '                                                </div>\n' +
-                            '                                                <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="editRole">\n' +
+                            '                                                <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="editRole' + user.id + '">\n' +
                             '                                                    <option value="admin">admin</option>\n' +
                             '                                                    <option value="user">user</option>\n' +
                             '                                                </select>\n' +
@@ -152,9 +144,9 @@ $(document).ready(function () {
                             '                                                <div class="form-group text-center">\n' +
                             '\n' +
                             '                                                    <b>Login:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="text" name="login" value="' + user.login +'" id="editLogin"><br>\n' +
+                            '                                                    <input class="input-lg" type="text" name="login" value="' + user.login +'" id="editLogin' + user.id + '"><br>\n' +
                             '                                                    <b>Password:</b><br>\n' +
-                            '                                                    <input class="input-lg" type="password" name="password" id="editPassword">\n' +
+                            '                                                    <input class="input-lg" type="password" name="password" id="editPassword' + user.id + '">\n' +
                             '                                                    <br>\n' +
                             '\n' +
                             '                                                    <div class="modal-footer">\n' +
@@ -217,7 +209,7 @@ $(document).ready(function () {
             // var id = $("#editId").val();
 
             var editUser = {}
-            editUser["id"] = $('#editId' + id).val();
+            editUser["id"] = $('#editUser' + id).val();
             editUser["firstName"] = $('#editFirstName' + id).val();
             editUser["lastName"] = $('#editLastName' + id).val();
             editUser["phoneNumber"] = $('#editPhoneNumber' + id).val();
@@ -243,9 +235,7 @@ $(document).ready(function () {
 
         }
 
-        function delete_user_submit() {
-
-            var id = $("#delId").val();
+        function delete_user_submit(id) {
 
             $.ajax({
                 type: "DELETE",
