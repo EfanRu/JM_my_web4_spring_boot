@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-    clean_user_table();
-    refresh_user_table();
+    // clean_user_table();
+    // refresh_user_table();
 
     // $("button[data-toggle=modal]").click(function() {
     $(document).on('click', 'button[data-toggle=modal]', function() {
@@ -18,7 +18,7 @@ $(document).ready(function () {
                 var data = '';
 
                 data += '\n' +
-                    '                                            <form class="editFromClass" action="/admin" method="put" id="' + user.id + '">\n' +
+                    // '                                            <form class="editFromClass" action="/admin" method="put" id="' + user.id + '">\n' +
                     '                                                <div class="form-group text-center">\n' +
                     '                                                    <b>Id:</b><br>\n' +
                     '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editUser"><br>\n' +
@@ -42,7 +42,9 @@ $(document).ready(function () {
                     '                                                    <input class="input-lg" type="text" name="login" value="' + user.login + '" id="editLogin"><br>\n' +
                     '                                                    <b>Password:</b><br>\n' +
                     '                                                    <input class="input-lg" type="password" name="password" id="editPassword">\n' +
-                    '                                                    <br>';
+                    '                                                    <br>' +
+                    '                                                 </div>';
+                    // '                                              </form>';
 
                 $('#modal-warning').show();
                 $('#modalContent').html(data);
@@ -68,12 +70,13 @@ $(document).ready(function () {
 
         event.preventDefault();
 
-        var editUserId = $(this).attr('id');
-        var editUserId2 = $(this).val();
-        $('#' + editUserId).on(edit_user_submit(editUserId));
+        // var editUserId = $(this).attr('id');
+        // var editUserId2 = $(this).val();
+        // $('#' + editUserId).on(edit_user_submit(editUserId));
+        edit_user_submit();
 
-        clean_user_table();
-        refresh_user_table();
+        // clean_user_table();
+        // refresh_user_table();
     });
 
 
@@ -85,8 +88,8 @@ $(document).ready(function () {
         var delUserId = $(this).attr('id');
         $('#' + delUserId).on(delete_user_submit(delUserId));
 
-        clean_user_table();
-        refresh_user_table();
+        // clean_user_table();
+        // refresh_user_table();
     });
 
     function update_table() {
