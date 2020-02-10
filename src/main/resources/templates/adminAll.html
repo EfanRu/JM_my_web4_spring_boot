@@ -42,6 +42,15 @@
         margin-bottom: 20px;
     }
 
+    .form-control {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%,0);
+        margin-bottom: 20px;
+        width: 265px;
+        height: 55px;
+    }
+
     .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
         width: 220px;
         position: relative;
@@ -164,7 +173,7 @@ ning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>-->
 
 <!--                            <th:block th:each="user:${listUser}" >-->
 
-                                <!--                            <div class="modal modal-warning fade in" th:id="modal-warning + ${user.id}" >-->
+<!--                                                            <div class="modal modal-warning fade in" th:id="modal-warning + ${user.id}" >-->
 <!--                            <div class="modal modal-warning fade in" id="modal-warning">-->
 <!--                                <div class="modal-dialog">-->
 <!--                                    <div class="modal-content">-->
@@ -394,11 +403,16 @@ ning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>-->
                                 <input type="text" class="input-lg" name="phoneNumber" id="addPhoneNumber">
                             </div>
                             <div class="text-center"><b>Role</b>
-                            </div>
-                            <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="addRole">
+                            <select class="form-control" name = "role" id="addRole">
                                 <option value="admin">admin</option>
                                 <option value="user">user</option>
                             </select>
+                            </div>
+<!--                            <select class="selectpicker" data-live-search="true" data-live-search-style="startsWith" name = "role" id="addRole">-->
+<!--                                <option value="admin">admin</option>-->
+<!--                                <option value="user">user</option>-->
+<!--                            </select>-->
+
                             <div class="form-group text-center">
                                 <b>Login</b><br>
                                 <input type="text" class="input-lg" name="login" id="addLogin">
@@ -415,6 +429,7 @@ ning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>-->
             </div>
         </div>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -436,6 +451,7 @@ ning" th:attr="data-target='#modal-warning'+${user.id}">edit</button>-->
 
 
     <script type="text/javascript" src="main.js"></script>
+
 
 </body>
 </html>
