@@ -53,9 +53,24 @@ $(document).ready(function () {
 
     });
 
+
     $("#addUser").submit(function (event) {
         event.preventDefault();
         add_new_user_submit();
+
+        //Trying hide tabs after add user
+        // $('#navTabs li:first').tab('show');
+        // $('.nav-link a[href="#table"]').tab('show');
+        // $('#navTable').show();
+        // $('#navAddForm').removeClass('active');
+        // $('#navTable').addClass('active').click();
+        // $('#navTable').tab('show');
+        // refresh_user_table();
+
+        // $('#navTable').trigger('click');
+        // $('#table').trigger('click');
+        // $('#table').tab('show').trigger('click');
+        // $('.nav-tabs a[href="#table"]').tab('show');
     });
 
     $(document).on('click', '.editFromClassBut', function (event) {
@@ -151,7 +166,6 @@ $(document).ready(function () {
                     console.log("ERROR : ", e);
                 }
             });
-
         }
 
         function edit_user_submit() {
