@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-    // clean_user_table();
-    // refresh_user_table();
+    clean_user_table();
+    refresh_user_table();
 
     // $("button[data-toggle=modal]").click(function() {
     $(document).on('click', 'button[data-toggle=modal]', function() {
@@ -18,7 +18,7 @@ $(document).ready(function () {
                 var data = '';
 
                 data += '\n' +
-                    // '                                            <form class="editFromClass" action="/admin" method="put" id="' + user.id + '">\n' +
+                    '                                            <form class="editFromClass" action="/admin" method="put" id="' + user.id + '">\n' +
                     '                                                <div class="form-group text-center">\n' +
                     '                                                    <b>Id:</b><br>\n' +
                     '                                                    <input class="input-lg" type="text" name="id" value="' + user.id + '" id="editUser"><br>\n' +
@@ -43,8 +43,8 @@ $(document).ready(function () {
                     '                                                    <b>Password:</b><br>\n' +
                     '                                                    <input class="input-lg" type="password" name="password" id="editPassword">\n' +
                     '                                                    <br>' +
-                    '                                                 </div>';
-                    // '                                              </form>';
+                    '                                                 </div>' +
+                    '                                              </form>';
 
                 $('#modal-warning').show();
                 $('#modalContent').html(data);
@@ -66,7 +66,8 @@ $(document).ready(function () {
         // refresh_user_table();
     });
 
-    $('.editFromClass').on('submit', function (event) {
+    // $('.editFromClass').on('submit', function (event) {
+    $(document).on('click', '.editFromClassBut', function (event) {
 
         event.preventDefault();
 
@@ -75,12 +76,14 @@ $(document).ready(function () {
         // $('#' + editUserId).on(edit_user_submit(editUserId));
         edit_user_submit();
 
+        $('#modal-warning').close();
         // clean_user_table();
         // refresh_user_table();
     });
 
 
-    $(".deleteFromClass").on('submit', function (event) {
+    // $(".deleteFromClass").on('click', function (event) {
+    $(document).on('click', ".deleteFromClass", function (event) {
 
         //stop submit the form, we will post it manually.
         event.preventDefault();
@@ -150,12 +153,12 @@ $(document).ready(function () {
                         data += '<td>' + user.phoneNumber + '</td>';
                         data += '<td>' + user.role.name + '</td>';
                         data += '<td>' +
-                            '                                                <form action="/admin" method="delete" id="deleteUserHid">\n' +
-                            '                                                    <button class="btn btn-danger btn-xs hidden" type="submit" name="id" value="' + user.id + '"><span class="glyphicon glyphicon-trash"></span></button>\n' +
-                            '                                                </form>\n' +
-                            '\n' +
+                            // '                                                <form action="/admin" method="delete" id="deleteUserHid">\n' +
+                            // '                                                    <button class="btn btn-danger btn-xs hidden" type="submit" name="id" value="' + user.id + '"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                            // '                                                </form>\n' +
+                            // '\n' +
                             '                                                <form class="deleteFromClass" action="/admin" method="delete" id="' + user.id + '">\n' +
-                            '                                                    <button class="btn btn-danger btn-xs" type="submit" name="id" value="' + user.id + '" id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
+                            '                                                    <button class="btn btn-danger btn-xs" type="button" name="id" value="' + user.id + '" id="delId"><span class="glyphicon glyphicon-trash"></span></button>\n' +
                             '                                                </form>\n' +
                             '                                            </td>\n' +
                             '\n' +
@@ -163,7 +166,7 @@ $(document).ready(function () {
                             '                                                <form class="editFromClass" id="' + user.id + '">\n' +
                             '                                                    <button href="#modal-warning" type="button" class="btn btn-primary btn-xs" data-toggle="modal" id="' + user.id + '">edit</button>\n' +
                             '            <!--                            Modal window-->\n' +
-                            '                                                    <div class="modal modal-warning fade in" id="modal-warning">\n' +
+                            '                                                    <div class="modal modal-warning fade in" data-backdrop="false" id="modal-warning">\n' +
                             '                                                        <div class="modal-dialog">\n' +
                             '                                                            <div class="modal-content">\n' +
                             '                                                                <div class="modal-header">\n' +
@@ -176,7 +179,7 @@ $(document).ready(function () {
                             '                                                                </div>\n' +
                             '                                                                <div class="modal-footer">\n' +
                             '                                                                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>\n' +
-                            '                                                                    <button type="submit" class="btn btn-outline">Change</button>\n' +
+                            '                                                                    <button type="button" class="btn btn-outline editFromClassBut">Change</button>\n' +
                             '                                                                </div>;\n' +
                             '                                                            </div>\n' +
                             '                                                        </div>\n' +
@@ -281,6 +284,8 @@ $(document).ready(function () {
                 timeout: 600000,
                 success: function (data) {
                     console.log("SUCCESS : ", data);
+                    clean_user_table();
+                    refresh_user_table();
                 },
                 error: function (e) {
                     console.log("ERROR : ", e);
@@ -312,6 +317,9 @@ $(document).ready(function () {
                 timeout: 600000,
                 success: function (data) {
                     console.log("SUCCESS : ", data);
+                    clean_user_table();
+                    refresh_user_table();
+                    $('#modal-warning').close();
                 },
                 error: function (e) {
                     console.log("ERROR : ", e);
@@ -329,9 +337,13 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (result) {
                     console.log("SUCCESS : ", result);
+                    clean_user_table();
+                    refresh_user_table();
                 },
                 error: function (e) {
                     console.log("ERROR : ", e);
+                    clean_user_table();
+                    refresh_user_table();
                 }
             });
         }
