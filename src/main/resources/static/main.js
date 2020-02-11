@@ -70,7 +70,7 @@ $(document).ready(function () {
         // $('#navTable').trigger('click');
         // $('#table').trigger('click');
         // $('#table').tab('show').trigger('click');
-        // $('.nav-tabs a[href="#table"]').tab('show');
+        // $('.nav-tabs a[href="#table"]').tab('show'); 
     });
 
     $(document).on('click', '.editFromClassBut', function (event) {
