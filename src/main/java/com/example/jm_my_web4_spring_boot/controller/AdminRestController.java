@@ -1,7 +1,7 @@
-package com.example.springboot.controller;
+package com.example.jm_my_web4_spring_boot.controller;
 
-import com.example.springboot.model.User;
-import com.example.springboot.service.UserService;
+import com.example.jm_my_web4_spring_boot.model.User;
+import com.example.jm_my_web4_spring_boot.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

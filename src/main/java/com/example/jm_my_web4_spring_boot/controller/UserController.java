@@ -1,6 +1,6 @@
-package com.example.springboot.controller;
+package com.example.jm_my_web4_spring_boot.controller;
 
-import com.example.springboot.model.User;
+import com.example.jm_my_web4_spring_boot.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
