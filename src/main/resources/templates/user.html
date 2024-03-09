@@ -6,30 +6,13 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css">
-
-    <style type="text/css">
-
-        .container-fluid {
-            padding-right: 0px;
-            padding-left: 0px;
-            margin-right: auto;
-            margin-left: auto;
-        }
-
-        input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].btn-block {
-            width: 100%;
-            margin: 5px;
-        }
-
-    </style>
 </head>
 
 <body>
 <div class="input-group" style="background: black">
-    <h3 style="color: darkgray">My project</h3>
+    <h3 style="color: darkgray; padding-left: 20px">My project</h3>
     <span class="input-group-btn">
             <form action="/logout" method="get" >
                 <button class="btn" style="background: black; color: darkgray">Log out</button>
@@ -43,9 +26,9 @@
         <div class="col-sm-2 col-md-2 sidebar">
             <ul class="nav nav-siderbar">
                 <br>
-                <input type="button" class="btn-lg btn-info btn-block" value="admin" onclick="location.href = '/admin/all';">
+                <a class="btn-link" onclick="location.href = '/admin';">Admin page</a>
                 <br>
-                <input type="button" class="btn-lg btn-danger btn-block" value="user" onclick="location.href = '/user';">
+                <a class="btn-link" onclick="location.href = '/user';">User page</a>
             </ul>
         </div>
         <div class="col-sm-10 col-md-10 main" style="background: #d9d9d9; min-height: 700px">

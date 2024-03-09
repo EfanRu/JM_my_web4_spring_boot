@@ -158,6 +158,13 @@ Reworking list 9:
 Reworking list 10:
     + 1) Шлефануть аксесс хэндлер;
     + 2) Сделать дефолтный Bean c пользователем.
+Reworking list 11:
+    + 1. очистка формы
+    + 2. вынос в другой файл зависимостей
+    + 3. удалить лишние ссылки
+    + 4. Шаблонные строки
+    + 5. разносить по разным файлам js
+    + 6. Убрать model and view /admin/edit;
 
 Save code:
     insert into user (id, first_name, last_name, phone_number, role, login, password) VALUES(null, 'admin', 'admin', 999, 'admin', 'admin', 'admin');
